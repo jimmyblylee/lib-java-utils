@@ -68,8 +68,10 @@ public abstract class TypeUtils {
             if (rhsType instanceof Class<?>) {
                 Type lhsRaw = ((ParameterizedType) lhsType).getRawType();
 
-                if (lhsRaw instanceof Class<?>) { return ClassUtils.isAssignable((Class<?>) lhsRaw, (Class<?>) rhsType); }
-            } else if (rhsType instanceof ParameterizedType) { return isAssignable((ParameterizedType) lhsType, (ParameterizedType) rhsType); }
+                if (lhsRaw instanceof Class<?>) { return ClassUtils.isAssignable((Class<?>) lhsRaw,
+                        (Class<?>) rhsType); }
+            } else if (rhsType instanceof ParameterizedType) { return isAssignable((ParameterizedType) lhsType,
+                    (ParameterizedType) rhsType); }
         }
 
         if (lhsType instanceof GenericArrayType) {
@@ -103,7 +105,8 @@ public abstract class TypeUtils {
             Type lhsArg = lhsTypeArguments[i];
             Type rhsArg = rhsTypeArguments[i];
 
-            if (!lhsArg.equals(rhsArg) && !(lhsArg instanceof WildcardType && isAssignable((WildcardType) lhsArg, rhsArg))) { return false; }
+            if (!lhsArg.equals(rhsArg) && !(lhsArg instanceof WildcardType
+                    && isAssignable((WildcardType) lhsArg, rhsArg))) { return false; }
         }
 
         return true;

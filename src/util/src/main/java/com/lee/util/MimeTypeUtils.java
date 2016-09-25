@@ -39,9 +39,10 @@ import com.lee.util.MimeType.SpecificityComparator;
  */
 public abstract class MimeTypeUtils {
 
-    private static final byte[] BOUNDARY_CHARS = new byte[] { '-', '_', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g',
-            'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-            'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+    private static final byte[] BOUNDARY_CHARS = new byte[] { '-', '_', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+            'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+            'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 
     private static final Random RND = new Random();
 
@@ -212,7 +213,8 @@ public abstract class MimeTypeUtils {
      * @throws InvalidMimeTypeException if the string cannot be parsed
      */
     public static MimeType parseMimeType(String mimeType) {
-        if (!StringUtils.hasLength(mimeType)) { throw new InvalidMimeTypeException(mimeType, "'mimeType' must not be empty"); }
+        if (!StringUtils
+                .hasLength(mimeType)) { throw new InvalidMimeTypeException(mimeType, "'mimeType' must not be empty"); }
         String[] parts = StringUtils.tokenizeToStringArray(mimeType, ";");
 
         String fullType = parts[0].trim();
@@ -222,11 +224,13 @@ public abstract class MimeTypeUtils {
         }
         int subIndex = fullType.indexOf('/');
         if (subIndex == -1) { throw new InvalidMimeTypeException(mimeType, "does not contain '/'"); }
-        if (subIndex == fullType.length() - 1) { throw new InvalidMimeTypeException(mimeType, "does not contain subtype after '/'"); }
+        if (subIndex == fullType.length()
+                - 1) { throw new InvalidMimeTypeException(mimeType, "does not contain subtype after '/'"); }
         String type = fullType.substring(0, subIndex);
         String subtype = fullType.substring(subIndex + 1, fullType.length());
-        if (MimeType.WILDCARD_TYPE.equals(type) && !MimeType.WILDCARD_TYPE.equals(subtype)) { throw new InvalidMimeTypeException(mimeType,
-                "wildcard type is legal only in '*/*' (all mime types)"); }
+        if (MimeType.WILDCARD_TYPE.equals(type)
+                && !MimeType.WILDCARD_TYPE.equals(subtype)) { throw new InvalidMimeTypeException(mimeType,
+                        "wildcard type is legal only in '*/*' (all mime types)"); }
 
         Map<String, String> parameters = null;
         if (parts.length > 1) {
@@ -292,21 +296,25 @@ public abstract class MimeTypeUtils {
      * <p>
      * Given two mime types:
      * <ol>
-     * <li>if either mime type has a {@linkplain MimeType#isWildcardType() wildcard type}, then the mime type without the wildcard is ordered before the
-     * other.</li>
-     * <li>if the two mime types have different {@linkplain MimeType#getType() types}, then they are considered equal and remain their current order.</li>
-     * <li>if either mime type has a {@linkplain MimeType#isWildcardSubtype() wildcard subtype} , then the mime type without the wildcard is sorted before the
-     * other.</li>
-     * <li>if the two mime types have different {@linkplain MimeType#getSubtype() subtypes}, then they are considered equal and remain their current order.</li>
-     * <li>if the two mime types have a different amount of {@linkplain MimeType#getParameter(String) parameters}, then the mime type with the most parameters
-     * is ordered before the other.</li>
+     * <li>if either mime type has a {@linkplain MimeType#isWildcardType() wildcard type}, then the mime type without
+     * the wildcard is ordered before the other.</li>
+     * <li>if the two mime types have different {@linkplain MimeType#getType() types}, then they are considered equal
+     * and remain their current order.</li>
+     * <li>if either mime type has a {@linkplain MimeType#isWildcardSubtype() wildcard subtype} , then the mime type
+     * without the wildcard is sorted before the other.</li>
+     * <li>if the two mime types have different {@linkplain MimeType#getSubtype() subtypes}, then they are considered
+     * equal and remain their current order.</li>
+     * <li>if the two mime types have a different amount of {@linkplain MimeType#getParameter(String) parameters}, then
+     * the mime type with the most parameters is ordered before the other.</li>
      * </ol>
      * <p>
-     * For example: <blockquote>audio/basic &lt; audio/* &lt; *&#047;*</blockquote> <blockquote>audio/basic;level=1 &lt; audio/basic</blockquote>
-     * <blockquote>audio/basic == text/html</blockquote> <blockquote>audio/basic == audio/wave</blockquote>
+     * For example: <blockquote>audio/basic &lt; audio/* &lt; *&#047;*</blockquote> <blockquote>audio/basic;level=1 &lt;
+     * audio/basic</blockquote> <blockquote>audio/basic == text/html</blockquote> <blockquote>audio/basic ==
+     * audio/wave</blockquote>
      * 
      * @param mimeTypes the list of mime types to be sorted
-     * @see <a href="http://tools.ietf.org/html/rfc7231#section-5.3.2">HTTP 1.1: Semantics and Content, section 5.3.2</a>
+     * @see <a href="http://tools.ietf.org/html/rfc7231#section-5.3.2">HTTP 1.1: Semantics and Content, section
+     *      5.3.2</a>
      */
     public static void sortBySpecificity(List<MimeType> mimeTypes) {
         Assert.notNull(mimeTypes, "'mimeTypes' must not be null");
@@ -317,6 +325,7 @@ public abstract class MimeTypeUtils {
 
     /**
      * Generate a random MIME boundary as bytes, often used in multipart mime types.
+     * 
      * @return random MIME boundary as bytes
      */
     public static byte[] generateMultipartBoundary() {
@@ -329,6 +338,7 @@ public abstract class MimeTypeUtils {
 
     /**
      * Generate a random MIME boundary as String, often used in multipart mime types.
+     * 
      * @return random MIME boundary as String
      */
     public static String generateMultipartBoundaryString() {

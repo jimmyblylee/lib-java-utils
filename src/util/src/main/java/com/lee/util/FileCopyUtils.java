@@ -31,8 +31,9 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 /**
- * Simple utility methods for file and stream copying. All copy methods use a block size of 4096 bytes, and close all affected streams when done. A variation of
- * the copy methods from this class that leave streams open can be found in {@link StreamUtils}.
+ * Simple utility methods for file and stream copying. All copy methods use a block size of 4096 bytes, and close all
+ * affected streams when done. A variation of the copy methods from this class that leave streams open can be found in
+ * {@link StreamUtils}.
  *
  * <p>
  * Mainly for use within the framework, but also useful for application code.
@@ -60,7 +61,8 @@ public abstract class FileCopyUtils {
     public static int copy(File in, File out) throws IOException {
         Assert.notNull(in, "No input File specified");
         Assert.notNull(out, "No output File specified");
-        return copy(new BufferedInputStream(new FileInputStream(in)), new BufferedOutputStream(new FileOutputStream(out)));
+        return copy(new BufferedInputStream(new FileInputStream(in)),
+                new BufferedOutputStream(new FileOutputStream(out)));
     }
 
     /**

@@ -17,7 +17,8 @@
 package com.lee.util;
 
 /**
- * Utility methods for simple pattern matching, in particular for Spring's typical "xxx*", "*xxx" and "*xxx*" pattern styles.
+ * Utility methods for simple pattern matching, in particular for Spring's typical "xxx*", "*xxx" and "*xxx*" pattern
+ * styles.
  *
  * @author Juergen Hoeller
  * @since 2.0
@@ -25,8 +26,8 @@ package com.lee.util;
 public abstract class PatternMatchUtils {
 
     /**
-     * Match a String against the given pattern, supporting the following simple pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy" matches (with an
-     * arbitrary number of pattern parts), as well as direct equality.
+     * Match a String against the given pattern, supporting the following simple pattern styles: "xxx*", "*xxx", "*xxx*"
+     * and "xxx*yyy" matches (with an arbitrary number of pattern parts), as well as direct equality.
      * 
      * @param pattern the pattern to match against
      * @param str the String to match
@@ -44,7 +45,8 @@ public abstract class PatternMatchUtils {
             if ("".equals(part)) { return simpleMatch(pattern.substring(nextIndex), str); }
             int partIndex = str.indexOf(part);
             while (partIndex != -1) {
-                if (simpleMatch(pattern.substring(nextIndex), str.substring(partIndex + part.length()))) { return true; }
+                if (simpleMatch(pattern.substring(nextIndex),
+                        str.substring(partIndex + part.length()))) { return true; }
                 partIndex = str.indexOf(part, partIndex + 1);
             }
             return false;
@@ -54,8 +56,8 @@ public abstract class PatternMatchUtils {
     }
 
     /**
-     * Match a String against the given patterns, supporting the following simple pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy" matches (with an
-     * arbitrary number of pattern parts), as well as direct equality.
+     * Match a String against the given patterns, supporting the following simple pattern styles: "xxx*", "*xxx",
+     * "*xxx*" and "xxx*yyy" matches (with an arbitrary number of pattern parts), as well as direct equality.
      * 
      * @param patterns the patterns to match against
      * @param str the String to match

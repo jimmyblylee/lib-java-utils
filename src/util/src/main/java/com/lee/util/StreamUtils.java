@@ -29,8 +29,9 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 
 /**
- * Simple utility methods for dealing with streams. The copy methods of this class are similar to those defined in {@link FileCopyUtils} except that all
- * affected streams are left open when done. All copy methods use a block size of 4096 bytes.
+ * Simple utility methods for dealing with streams. The copy methods of this class are similar to those defined in
+ * {@link FileCopyUtils} except that all affected streams are left open when done. All copy methods use a block size of
+ * 4096 bytes.
  *
  * <p>
  * Mainly for use within the framework, but also useful for application code.
@@ -142,7 +143,8 @@ public abstract class StreamUtils {
     }
 
     /**
-     * Return a variant of the given {@link InputStream} where calling {@link InputStream#close() close()} has no effect.
+     * Return a variant of the given {@link InputStream} where calling {@link InputStream#close() close()} has no
+     * effect.
      * 
      * @param in the InputStream to decorate
      * @return a version of the InputStream that ignores calls to close
@@ -153,7 +155,8 @@ public abstract class StreamUtils {
     }
 
     /**
-     * Return a variant of the given {@link OutputStream} where calling {@link OutputStream#close() close()} has no effect.
+     * Return a variant of the given {@link OutputStream} where calling {@link OutputStream#close() close()} has no
+     * effect.
      * 
      * @param out the OutputStream to decorate
      * @return a version of the OutputStream that ignores calls to close

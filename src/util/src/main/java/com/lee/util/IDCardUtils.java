@@ -121,9 +121,7 @@ public abstract class IDCardUtils {
      */
     public static String conver15CardTo18(String idCard) {
         String idCard18 = "";
-        if (idCard.length() != CHINA_ID_MIN_LENGTH) {
-            return null;
-        }
+        if (idCard.length() != CHINA_ID_MIN_LENGTH) { return null; }
         if (isNum(idCard)) {
             // birthday
             String birthday = idCard.substring(6, 12);
@@ -134,8 +132,7 @@ public abstract class IDCardUtils {
                 e.printStackTrace();
             }
             Calendar cal = Calendar.getInstance();
-            if (birthDate != null)
-                cal.setTime(birthDate);
+            if (birthDate != null) cal.setTime(birthDate);
             // get birth day year
             String sYear = String.valueOf(cal.get(Calendar.YEAR));
             idCard18 = idCard.substring(0, 6) + sYear + idCard.substring(8);
@@ -163,22 +160,16 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return true for valid
      */
     public static boolean validateCard(String idCard) {
         String card = idCard.trim();
-        if (validateIdCard18(card)) {
-            return true;
-        }
-        if (validateIdCard15(card)) {
-            return true;
-        }
+        if (validateIdCard18(card)) { return true; }
+        if (validateIdCard15(card)) { return true; }
         String[] cardval = validateIdCard10(card);
         if (cardval != null) {
-            if (cardval[2].equals("true")) {
-                return true;
-            }
+            if (cardval[2].equals("true")) { return true; }
         }
         return false;
     }
@@ -188,7 +179,7 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return true for valid
      */
     public static boolean validateIdCard18(String idCard) {
@@ -221,18 +212,14 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return true for valid
      */
     public static boolean validateIdCard15(String idCard) {
-        if (idCard.length() != CHINA_ID_MIN_LENGTH) {
-            return false;
-        }
+        if (idCard.length() != CHINA_ID_MIN_LENGTH) { return false; }
         if (isNum(idCard)) {
             String proCode = idCard.substring(0, 2);
-            if (cityCodes.get(proCode) == null) {
-                return false;
-            }
+            if (cityCodes.get(proCode) == null) { return false; }
             String birthCode = idCard.substring(6, 12);
             Date birthDate = null;
             try {
@@ -241,11 +228,9 @@ public abstract class IDCardUtils {
                 e.printStackTrace();
             }
             Calendar cal = Calendar.getInstance();
-            if (birthDate != null)
-                cal.setTime(birthDate);
-            if (!valiDate(cal.get(Calendar.YEAR), Integer.valueOf(birthCode.substring(2, 4)), Integer.valueOf(birthCode.substring(4, 6)))) {
-                return false;
-            }
+            if (birthDate != null) cal.setTime(birthDate);
+            if (!valiDate(cal.get(Calendar.YEAR), Integer.valueOf(birthCode.substring(2, 4)),
+                    Integer.valueOf(birthCode.substring(4, 6)))) { return false; }
         } else {
             return false;
         }
@@ -257,7 +242,7 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return <b> id card info array </b>
      *         <dl>
      *         <dd>[0] - Taiwan, Macao, Hongkong</dd>
@@ -269,9 +254,7 @@ public abstract class IDCardUtils {
     public static String[] validateIdCard10(String idCard) {
         String[] info = new String[3];
         String card = idCard.replaceAll("[\\(|\\)]", "");
-        if (card.length() != 8 && card.length() != 9 && idCard.length() != 10) {
-            return null;
-        }
+        if (card.length() != 8 && card.length() != 9 && idCard.length() != 10) { return null; }
         if (idCard.matches("^[a-zA-Z][0-9]{9}$")) { // 台湾
             info[0] = "Taiwan";
             String char2 = idCard.substring(1, 2);
@@ -304,7 +287,7 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return true for valid
      */
     public static boolean validateTWCard(String idCard) {
@@ -327,7 +310,7 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return true for valid
      */
     public static boolean validateHKCard(String idCard) {
@@ -394,39 +377,39 @@ public abstract class IDCardUtils {
     private static String getCheckCode18(int iSum) {
         String sCode = "";
         switch (iSum % 11) {
-        case 10:
-            sCode = "2";
-            break;
-        case 9:
-            sCode = "3";
-            break;
-        case 8:
-            sCode = "4";
-            break;
-        case 7:
-            sCode = "5";
-            break;
-        case 6:
-            sCode = "6";
-            break;
-        case 5:
-            sCode = "7";
-            break;
-        case 4:
-            sCode = "8";
-            break;
-        case 3:
-            sCode = "9";
-            break;
-        case 2:
-            sCode = "x";
-            break;
-        case 1:
-            sCode = "0";
-            break;
-        case 0:
-            sCode = "1";
-            break;
+            case 10:
+                sCode = "2";
+                break;
+            case 9:
+                sCode = "3";
+                break;
+            case 8:
+                sCode = "4";
+                break;
+            case 7:
+                sCode = "5";
+                break;
+            case 6:
+                sCode = "6";
+                break;
+            case 5:
+                sCode = "7";
+                break;
+            case 4:
+                sCode = "8";
+                break;
+            case 3:
+                sCode = "9";
+                break;
+            case 2:
+                sCode = "x";
+                break;
+            case 1:
+                sCode = "0";
+                break;
+            case 0:
+                sCode = "1";
+                break;
         }
         return sCode;
     }
@@ -436,7 +419,7 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return age by int
      */
     public static int getAgeByIdCard(String idCard) {
@@ -456,7 +439,7 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return yyyymmdd formated birth day string
      */
     public static String getBirthByIdCard(String idCard) {
@@ -474,7 +457,7 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return year
      */
     public static Short getYearByIdCard(String idCard) {
@@ -492,7 +475,7 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return month
      */
     public static Short getMonthByIdCard(String idCard) {
@@ -510,7 +493,7 @@ public abstract class IDCardUtils {
      * Create Time: Apr 12, 2016 <br>
      * Create by : xiangyu_li@asdc.com.cn <br>
      *
-     * @param idCard  idCard string
+     * @param idCard idCard string
      * @return day
      */
     public static Short getDateByIdCard(String idCard) {
@@ -572,25 +555,22 @@ public abstract class IDCardUtils {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int datePerMonth;
-        if (iYear < MIN || iYear >= year) {
-            return false;
-        }
-        if (iMonth < 1 || iMonth > 12) {
-            return false;
-        }
+        if (iYear < MIN || iYear >= year) { return false; }
+        if (iMonth < 1 || iMonth > 12) { return false; }
         switch (iMonth) {
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-            datePerMonth = 30;
-            break;
-        case 2:
-            boolean dm = ((iYear % 4 == 0 && iYear % 100 != 0) || (iYear % 400 == 0)) && (iYear > MIN && iYear < year);
-            datePerMonth = dm ? 29 : 28;
-            break;
-        default:
-            datePerMonth = 31;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                datePerMonth = 30;
+                break;
+            case 2:
+                boolean dm = ((iYear % 4 == 0 && iYear % 100 != 0) || (iYear % 400 == 0))
+                        && (iYear > MIN && iYear < year);
+                datePerMonth = dm ? 29 : 28;
+                break;
+            default:
+                datePerMonth = 31;
         }
         return (iDate >= 1) && (iDate <= datePerMonth);
     }

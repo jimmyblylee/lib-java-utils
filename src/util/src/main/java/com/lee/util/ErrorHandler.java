@@ -17,8 +17,9 @@
 package com.lee.util;
 
 /**
- * A strategy for handling errors. This is especially useful for handling errors that occur during asynchronous execution of tasks that have been submitted to a
- * TaskScheduler. In such cases, it may not be possible to throw the error to the original caller.
+ * A strategy for handling errors. This is especially useful for handling errors that occur during asynchronous
+ * execution of tasks that have been submitted to a TaskScheduler. In such cases, it may not be possible to throw the
+ * error to the original caller.
  *
  * @author Mark Fisher
  * @since 3.0
@@ -27,6 +28,7 @@ public interface ErrorHandler {
 
     /**
      * Handle the given error, possibly rethrowing it as a fatal exception.
+     * 
      * @param t Throwable
      */
     void handleError(Throwable t);

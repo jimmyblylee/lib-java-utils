@@ -120,7 +120,8 @@ class XMLEventStreamWriter implements XMLStreamWriter {
     @Override
     public void writeStartElement(String prefix, String localName, String namespaceURI) throws XMLStreamException {
         closeEmptyElementIfNecessary();
-        doWriteStartElement(this.eventFactory.createStartElement(new QName(namespaceURI, localName, prefix), null, null));
+        doWriteStartElement(
+                this.eventFactory.createStartElement(new QName(namespaceURI, localName, prefix), null, null));
     }
 
     private void doWriteStartElement(StartElement startElement) throws XMLStreamException {
@@ -176,7 +177,8 @@ class XMLEventStreamWriter implements XMLStreamWriter {
     }
 
     @Override
-    public void writeAttribute(String prefix, String namespaceURI, String localName, String value) throws XMLStreamException {
+    public void writeAttribute(String prefix, String namespaceURI, String localName, String value)
+            throws XMLStreamException {
 
         this.eventWriter.add(this.eventFactory.createAttribute(prefix, namespaceURI, localName, value));
     }
@@ -202,7 +204,8 @@ class XMLEventStreamWriter implements XMLStreamWriter {
             newNamespaces.add(oldNamespace);
         }
         newNamespaces.add(namespace);
-        EndElement newEndElement = this.eventFactory.createEndElement(oldEndElement.getName(), newNamespaces.iterator());
+        EndElement newEndElement = this.eventFactory.createEndElement(oldEndElement.getName(),
+                newNamespaces.iterator());
         this.eventWriter.add(namespace);
         this.endElements.set(last, newEndElement);
     }

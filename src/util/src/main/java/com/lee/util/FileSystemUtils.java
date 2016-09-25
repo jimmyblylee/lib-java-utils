@@ -57,7 +57,8 @@ public abstract class FileSystemUtils {
      * @throws IOException in the case of I/O errors
      */
     public static void copyRecursively(File src, File dest) throws IOException {
-        Assert.isTrue(src != null && (src.isDirectory() || src.isFile()), "Source File must denote a directory or file");
+        Assert.isTrue(src != null && (src.isDirectory() || src.isFile()),
+                "Source File must denote a directory or file");
         Assert.notNull(dest, "Destination File must not be null");
         doCopyRecursively(src, dest);
     }

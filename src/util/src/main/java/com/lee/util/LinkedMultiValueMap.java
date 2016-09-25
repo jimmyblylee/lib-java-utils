@@ -25,11 +25,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Simple implementation of {@link MultiValueMap} that wraps a {@link LinkedHashMap}, storing multiple values in a {@link LinkedList}.
+ * Simple implementation of {@link MultiValueMap} that wraps a {@link LinkedHashMap}, storing multiple values in a
+ * {@link LinkedList}.
  *
  * <p>
- * This Map implementation is generally not thread-safe. It is primarily designed for data structures exposed from request objects, for use in a single thread
- * only.
+ * This Map implementation is generally not thread-safe. It is primarily designed for data structures exposed from
+ * request objects, for use in a single thread only.
  *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
@@ -58,8 +59,9 @@ public class LinkedMultiValueMap<K, V> implements MultiValueMap<K, V>, Serializa
     }
 
     /**
-     * Copy constructor: Create a new LinkedMultiValueMap with the same mappings as the specified Map. Note that this will be a shallow copy; its value-holding
-     * List entries will get reused and therefore cannot get modified independently.
+     * Copy constructor: Create a new LinkedMultiValueMap with the same mappings as the specified Map. Note that this
+     * will be a shallow copy; its value-holding List entries will get reused and therefore cannot get modified
+     * independently.
      * 
      * @param otherMap the Map whose mappings are to be placed in this Map
      * @see #clone()

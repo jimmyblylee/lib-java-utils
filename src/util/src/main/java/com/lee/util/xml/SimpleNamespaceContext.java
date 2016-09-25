@@ -28,8 +28,8 @@ import javax.xml.namespace.NamespaceContext;
 import com.lee.util.Assert;
 
 /**
- * Simple {@code javax.xml.namespace.NamespaceContext} implementation. Follows the standard {@code NamespaceContext} contract, and is loadable via a
- * {@code java.util.Map} or {@code java.util.Properties} object
+ * Simple {@code javax.xml.namespace.NamespaceContext} implementation. Follows the standard {@code NamespaceContext}
+ * contract, and is loadable via a {@code java.util.Map} or {@code java.util.Properties} object
  *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
@@ -83,6 +83,7 @@ public class SimpleNamespaceContext implements NamespaceContext {
 
     /**
      * Set the bindings for this namespace context. The supplied map must consist of string key value pairs.
+     * 
      * @param bindings bindings
      */
     public void setBindings(Map<String, String> bindings) {
@@ -154,6 +155,7 @@ public class SimpleNamespaceContext implements NamespaceContext {
 
     /**
      * Return all declared prefixes.
+     * 
      * @return all declared prefixes.
      */
     public Iterator<String> getBoundPrefixes() {

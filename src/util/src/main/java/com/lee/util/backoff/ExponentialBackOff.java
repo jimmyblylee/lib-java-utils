@@ -17,12 +17,14 @@
 package com.lee.util.backoff;
 
 /**
- * Implementation of {@link BackOff} that increases the back off period for each retry attempt. When the interval has reached the {@link #setMaxInterval(long)
- * max interval}, it is no longer increased. Stops retrying once the {@link #setMaxElapsedTime(long) max elapsed time} has been reached.
+ * Implementation of {@link BackOff} that increases the back off period for each retry attempt. When the interval has
+ * reached the {@link #setMaxInterval(long) max interval}, it is no longer increased. Stops retrying once the
+ * {@link #setMaxElapsedTime(long) max elapsed time} has been reached.
  *
  * <p>
- * Example: The default interval is {@value #DEFAULT_INITIAL_INTERVAL} ms, the default multiplier is {@value #DEFAULT_MULTIPLIER}, and the default max interval
- * is {@value #DEFAULT_MAX_INTERVAL}. For 10 attempts the sequence will be as follows:
+ * Example: The default interval is {@value #DEFAULT_INITIAL_INTERVAL} ms, the default multiplier is
+ * {@value #DEFAULT_MULTIPLIER}, and the default max interval is {@value #DEFAULT_MAX_INTERVAL}. For 10 attempts the
+ * sequence will be as follows:
  *
  * <pre>
  * request#     back off
@@ -40,8 +42,8 @@ package com.lee.util.backoff;
  * </pre>
  *
  * <p>
- * Note that the default max elapsed time is {@link Long#MAX_VALUE}. Use {@link #setMaxElapsedTime(long)} to limit the maximum length of time that an instance
- * should accumulate before returning {@link BackOffExecution#STOP}.
+ * Note that the default max elapsed time is {@link Long#MAX_VALUE}. Use {@link #setMaxElapsedTime(long)} to limit the
+ * maximum length of time that an instance should accumulate before returning {@link BackOffExecution#STOP}.
  *
  * @author Stephane Nicoll
  * @since 4.1
@@ -100,6 +102,7 @@ public class ExponentialBackOff implements BackOff {
 
     /**
      * The initial interval in milliseconds.
+     * 
      * @param initialInterval initialInterval
      */
     public void setInitialInterval(long initialInterval) {
@@ -108,6 +111,7 @@ public class ExponentialBackOff implements BackOff {
 
     /**
      * Return the initial interval in milliseconds.
+     * 
      * @return the initial interval in milliseconds.
      */
     public long getInitialInterval() {
@@ -116,6 +120,7 @@ public class ExponentialBackOff implements BackOff {
 
     /**
      * The value to multiply the current interval by for each retry attempt.
+     * 
      * @param multiplier multiplier
      */
     public void setMultiplier(double multiplier) {
@@ -125,6 +130,7 @@ public class ExponentialBackOff implements BackOff {
 
     /**
      * Return the value to multiply the current interval by for each retry attempt.
+     * 
      * @return the value to multiply the current interval by for each retry attempt.
      */
     public double getMultiplier() {
@@ -133,6 +139,7 @@ public class ExponentialBackOff implements BackOff {
 
     /**
      * The maximum back off time.
+     * 
      * @param maxInterval maxInterval
      */
     public void setMaxInterval(long maxInterval) {
@@ -141,6 +148,7 @@ public class ExponentialBackOff implements BackOff {
 
     /**
      * Return the maximum back off time.
+     * 
      * @return the maximum back off time.
      */
     public long getMaxInterval() {
@@ -148,7 +156,9 @@ public class ExponentialBackOff implements BackOff {
     }
 
     /**
-     * The maximum elapsed time in milliseconds after which a call to {@link BackOffExecution#nextBackOff()} returns {@link BackOffExecution#STOP}.
+     * The maximum elapsed time in milliseconds after which a call to {@link BackOffExecution#nextBackOff()} returns
+     * {@link BackOffExecution#STOP}.
+     * 
      * @param maxElapsedTime maxElapsedTime
      */
     public void setMaxElapsedTime(long maxElapsedTime) {
@@ -156,8 +166,11 @@ public class ExponentialBackOff implements BackOff {
     }
 
     /**
-     * Return the maximum elapsed time in milliseconds after which a call to {@link BackOffExecution#nextBackOff()} returns {@link BackOffExecution#STOP}.
-     * @return the maximum elapsed time in milliseconds after which a call to {@link BackOffExecution#nextBackOff()} returns {@link BackOffExecution#STOP}.
+     * Return the maximum elapsed time in milliseconds after which a call to {@link BackOffExecution#nextBackOff()}
+     * returns {@link BackOffExecution#STOP}.
+     * 
+     * @return the maximum elapsed time in milliseconds after which a call to {@link BackOffExecution#nextBackOff()}
+     *         returns {@link BackOffExecution#STOP}.
      */
     public long getMaxElapsedTime() {
         return maxElapsedTime;
@@ -169,8 +182,8 @@ public class ExponentialBackOff implements BackOff {
     }
 
     private void checkMultiplier(double multiplier) {
-        if (multiplier < 1) { throw new IllegalArgumentException(
-                "Invalid multiplier '" + multiplier + "'. Should be equal" + "or higher than 1. A multiplier of 1 is equivalent to a fixed interval"); }
+        if (multiplier < 1) { throw new IllegalArgumentException("Invalid multiplier '" + multiplier
+                + "'. Should be equal" + "or higher than 1. A multiplier of 1 is equivalent to a fixed interval"); }
     }
 
     private class ExponentialBackOffExecution implements BackOffExecution {

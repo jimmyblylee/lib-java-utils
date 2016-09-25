@@ -55,7 +55,8 @@ class StaxStreamHandler extends AbstractStaxHandler {
     }
 
     @Override
-    protected void startElementInternal(QName name, Attributes attributes, Map<String, String> namespaceMapping) throws XMLStreamException {
+    protected void startElementInternal(QName name, Attributes attributes, Map<String, String> namespaceMapping)
+            throws XMLStreamException {
 
         this.streamWriter.writeStartElement(name.getPrefix(), name.getLocalPart(), name.getNamespaceURI());
 
@@ -72,7 +73,8 @@ class StaxStreamHandler extends AbstractStaxHandler {
         for (int i = 0; i < attributes.getLength(); i++) {
             QName attrName = toQName(attributes.getURI(i), attributes.getQName(i));
             if (!isNamespaceDeclaration(attrName)) {
-                this.streamWriter.writeAttribute(attrName.getPrefix(), attrName.getNamespaceURI(), attrName.getLocalPart(), attributes.getValue(i));
+                this.streamWriter.writeAttribute(attrName.getPrefix(), attrName.getNamespaceURI(),
+                        attrName.getLocalPart(), attributes.getValue(i));
             }
         }
     }

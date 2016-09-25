@@ -17,7 +17,8 @@
 package com.lee.util;
 
 /**
- * Simple strategy interface for resolving a String value. Used by {@code org.springframework.beans.factory.config.ConfigurableBeanFactory}.
+ * Simple strategy interface for resolving a String value. Used by
+ * {@code org.springframework.beans.factory.config.ConfigurableBeanFactory}.
  * {@code org.springframework.beans.factory.config.ConfigurableBeanFactory#resolveAliases}
  * {@code org.springframework.beans.factory.config.BeanDefinitionVisitor#BeanDefinitionVisitor(StringValueResolver)}
  * {@code org.springframework.beans.factory.config.PropertyPlaceholderConfigurer}

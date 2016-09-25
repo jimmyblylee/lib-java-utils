@@ -46,8 +46,9 @@ import com.lee.util.Assert;
 public abstract class DomUtils {
 
     /**
-     * Retrieves all child elements of the given DOM element that match any of the given element names. Only looks at the direct child level of the given
-     * element; do not go into further depth (in contrast to the DOM API's {@code getElementsByTagName} method).
+     * Retrieves all child elements of the given DOM element that match any of the given element names. Only looks at
+     * the direct child level of the given element; do not go into further depth (in contrast to the DOM API's
+     * {@code getElementsByTagName} method).
      * 
      * @param ele the DOM element to analyze
      * @param childEleNames the child element names to look for
@@ -71,8 +72,9 @@ public abstract class DomUtils {
     }
 
     /**
-     * Retrieves all child elements of the given DOM element that match the given element name. Only look at the direct child level of the given element; do not
-     * go into further depth (in contrast to the DOM API's {@code getElementsByTagName} method).
+     * Retrieves all child elements of the given DOM element that match the given element name. Only look at the direct
+     * child level of the given element; do not go into further depth (in contrast to the DOM API's
+     * {@code getElementsByTagName} method).
      * 
      * @param ele the DOM element to analyze
      * @param childEleName the child element name to look for
@@ -136,8 +138,9 @@ public abstract class DomUtils {
     /**
      * Extracts the text value from the given DOM element, ignoring XML comments.
      * <p>
-     * Appends all CharacterData nodes and EntityReference nodes into a single String value, excluding Comment nodes. Only exposes actual user-specified text,
-     * no default values of any kind.
+     * Appends all CharacterData nodes and EntityReference nodes into a single String value, excluding Comment nodes.
+     * Only exposes actual user-specified text, no default values of any kind.
+     * 
      * @param valueEle valueEle
      * @return CharacterData nodes and EntityReference nodes
      * 
@@ -159,8 +162,8 @@ public abstract class DomUtils {
     }
 
     /**
-     * Namespace-aware equals comparison. Returns {@code true} if either {@link Node#getLocalName} or {@link Node#getNodeName} equals {@code desiredName},
-     * otherwise returns {@code false}.
+     * Namespace-aware equals comparison. Returns {@code true} if either {@link Node#getLocalName} or
+     * {@link Node#getNodeName} equals {@code desiredName}, otherwise returns {@code false}.
      *
      * @param node node
      * @param desiredName desiredName

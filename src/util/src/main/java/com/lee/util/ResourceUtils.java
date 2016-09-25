@@ -25,18 +25,22 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Utility methods for resolving resource locations to files in the file system. Mainly for internal use within the framework.
+ * Utility methods for resolving resource locations to files in the file system. Mainly for internal use within the
+ * framework.
  *
  * <p>
- * Consider using Spring's Resource abstraction in the core package for handling all kinds of file resources in a uniform manner.
- * {@code org.springframework.core.io.ResourceLoader}'s {@code getResource()} method can resolve any location to a {@code org.springframework.core.io.Resource}
- * object, which in turn allows one to obtain a {@code java.io.File} in the file system through its {@code getFile()} method.
+ * Consider using Spring's Resource abstraction in the core package for handling all kinds of file resources in a
+ * uniform manner. {@code org.springframework.core.io.ResourceLoader}'s {@code getResource()} method can resolve any
+ * location to a {@code org.springframework.core.io.Resource} object, which in turn allows one to obtain a
+ * {@code java.io.File} in the file system through its {@code getFile()} method.
  *
  * <p>
- * The main reason for these utility methods for resource location handling is to support {@code Log4jConfigurer}, which must be able to resolve resource
- * locations <i>before the logging system has been initialized</i>. Spring's {@code Resource} abstraction in the core package, on the other hand, already
- * expects the logging system to be available. {@code org.springframework.core.io.Resource} {@code org.springframework.core.io.ClassPathResource}
- * {@code org.springframework.core.io.FileSystemResource} {@code org.springframework.core.io.UrlResource} {@code org.springframework.core.io.ResourceLoader}
+ * The main reason for these utility methods for resource location handling is to support {@code Log4jConfigurer}, which
+ * must be able to resolve resource locations <i>before the logging system has been initialized</i>. Spring's
+ * {@code Resource} abstraction in the core package, on the other hand, already expects the logging system to be
+ * available. {@code org.springframework.core.io.Resource} {@code org.springframework.core.io.ClassPathResource}
+ * {@code org.springframework.core.io.FileSystemResource} {@code org.springframework.core.io.UrlResource}
+ * {@code org.springframework.core.io.ResourceLoader}
  *
  * @author Juergen Hoeller
  * @since 1.1.5
@@ -107,9 +111,11 @@ public abstract class ResourceUtils {
     /**
      * Resolve the given resource location to a {@code java.net.URL}.
      * <p>
-     * Does not check whether the URL actually exists; simply returns the URL that the given location would correspond to.
+     * Does not check whether the URL actually exists; simply returns the URL that the given location would correspond
+     * to.
      * 
-     * @param resourceLocation the resource location to resolve: either a "classpath:" pseudo URL, a "file:" URL, or a plain file path
+     * @param resourceLocation the resource location to resolve: either a "classpath:" pseudo URL, a "file:" URL, or a
+     *            plain file path
      * @return a corresponding URL object
      * @throws FileNotFoundException if the resource cannot be resolved to a URL
      */
@@ -133,7 +139,8 @@ public abstract class ResourceUtils {
             try {
                 return new File(resourceLocation).toURI().toURL();
             } catch (MalformedURLException ex2) {
-                throw new FileNotFoundException("Resource location [" + resourceLocation + "] is neither a URL not a well-formed file path");
+                throw new FileNotFoundException(
+                        "Resource location [" + resourceLocation + "] is neither a URL not a well-formed file path");
             }
         }
     }
@@ -141,9 +148,11 @@ public abstract class ResourceUtils {
     /**
      * Resolve the given resource location to a {@code java.io.File}, i.e. to a file in the file system.
      * <p>
-     * Does not check whether the file actually exists; simply returns the File that the given location would correspond to.
+     * Does not check whether the file actually exists; simply returns the File that the given location would correspond
+     * to.
      * 
-     * @param resourceLocation the resource location to resolve: either a "classpath:" pseudo URL, a "file:" URL, or a plain file path
+     * @param resourceLocation the resource location to resolve: either a "classpath:" pseudo URL, a "file:" URL, or a
+     *            plain file path
      * @return a corresponding File object
      * @throws FileNotFoundException if the resource cannot be resolved to a file in the file system
      */
@@ -154,7 +163,8 @@ public abstract class ResourceUtils {
             String description = "class path resource [" + path + "]";
             ClassLoader cl = ClassUtils.getDefaultClassLoader();
             URL url = (cl != null ? cl.getResource(path) : ClassLoader.getSystemResource(path));
-            if (url == null) { throw new FileNotFoundException(description + " cannot be resolved to absolute file path because it does not exist"); }
+            if (url == null) { throw new FileNotFoundException(
+                    description + " cannot be resolved to absolute file path because it does not exist"); }
             return getFile(url, description);
         }
         try {
@@ -181,14 +191,16 @@ public abstract class ResourceUtils {
      * Resolve the given resource URL to a {@code java.io.File}, i.e. to a file in the file system.
      * 
      * @param resourceUrl the resource URL to resolve
-     * @param description a description of the original resource that the URL was created for (for example, a class path location)
+     * @param description a description of the original resource that the URL was created for (for example, a class path
+     *            location)
      * @return a corresponding File object
      * @throws FileNotFoundException if the URL cannot be resolved to a file in the file system
      */
     public static File getFile(URL resourceUrl, String description) throws FileNotFoundException {
         Assert.notNull(resourceUrl, "Resource URL must not be null");
         if (!URL_PROTOCOL_FILE.equals(resourceUrl.getProtocol())) { throw new FileNotFoundException(
-                description + " cannot be resolved to absolute file path " + "because it does not reside in the file system: " + resourceUrl); }
+                description + " cannot be resolved to absolute file path "
+                        + "because it does not reside in the file system: " + resourceUrl); }
         try {
             return new File(toURI(resourceUrl).getSchemeSpecificPart());
         } catch (URISyntaxException ex) {
@@ -212,53 +224,61 @@ public abstract class ResourceUtils {
      * Resolve the given resource URI to a {@code java.io.File}, i.e. to a file in the file system.
      * 
      * @param resourceUri the resource URI to resolve
-     * @param description a description of the original resource that the URI was created for (for example, a class path location)
+     * @param description a description of the original resource that the URI was created for (for example, a class path
+     *            location)
      * @return a corresponding File object
      * @throws FileNotFoundException if the URL cannot be resolved to a file in the file system
      */
     public static File getFile(URI resourceUri, String description) throws FileNotFoundException {
         Assert.notNull(resourceUri, "Resource URI must not be null");
         if (!URL_PROTOCOL_FILE.equals(resourceUri.getScheme())) { throw new FileNotFoundException(
-                description + " cannot be resolved to absolute file path " + "because it does not reside in the file system: " + resourceUri); }
+                description + " cannot be resolved to absolute file path "
+                        + "because it does not reside in the file system: " + resourceUri); }
         return new File(resourceUri.getSchemeSpecificPart());
     }
 
     /**
-     * Determine whether the given URL points to a resource in the file system, that is, has protocol "file", "vfsfile" or "vfs".
+     * Determine whether the given URL points to a resource in the file system, that is, has protocol "file", "vfsfile"
+     * or "vfs".
      * 
      * @param url the URL to check
      * @return whether the URL has been identified as a file system URL
      */
     public static boolean isFileURL(URL url) {
         String protocol = url.getProtocol();
-        return (URL_PROTOCOL_FILE.equals(protocol) || URL_PROTOCOL_VFSFILE.equals(protocol) || URL_PROTOCOL_VFS.equals(protocol));
+        return (URL_PROTOCOL_FILE.equals(protocol) || URL_PROTOCOL_VFSFILE.equals(protocol)
+                || URL_PROTOCOL_VFS.equals(protocol));
     }
 
     /**
-     * Determine whether the given URL points to a resource in a jar file, that is, has protocol "jar", "zip", "vfszip" or "wsjar".
+     * Determine whether the given URL points to a resource in a jar file, that is, has protocol "jar", "zip", "vfszip"
+     * or "wsjar".
      * 
      * @param url the URL to check
      * @return whether the URL has been identified as a JAR URL
      */
     public static boolean isJarURL(URL url) {
         String protocol = url.getProtocol();
-        return (URL_PROTOCOL_JAR.equals(protocol) || URL_PROTOCOL_ZIP.equals(protocol) || URL_PROTOCOL_VFSZIP.equals(protocol)
-                || URL_PROTOCOL_WSJAR.equals(protocol));
+        return (URL_PROTOCOL_JAR.equals(protocol) || URL_PROTOCOL_ZIP.equals(protocol)
+                || URL_PROTOCOL_VFSZIP.equals(protocol) || URL_PROTOCOL_WSJAR.equals(protocol));
     }
 
     /**
-     * Determine whether the given URL points to a jar file itself, that is, has protocol "file" and ends with the ".jar" extension.
+     * Determine whether the given URL points to a jar file itself, that is, has protocol "file" and ends with the
+     * ".jar" extension.
      * 
      * @param url the URL to check
      * @return whether the URL has been identified as a JAR file URL
      * @since 4.1
      */
     public static boolean isJarFileURL(URL url) {
-        return (URL_PROTOCOL_FILE.equals(url.getProtocol()) && url.getPath().toLowerCase().endsWith(JAR_FILE_EXTENSION));
+        return (URL_PROTOCOL_FILE.equals(url.getProtocol())
+                && url.getPath().toLowerCase().endsWith(JAR_FILE_EXTENSION));
     }
 
     /**
-     * Extract the URL for the actual jar file from the given URL (which may point to a resource in a jar file or to a jar file itself).
+     * Extract the URL for the actual jar file from the given URL (which may point to a resource in a jar file or to a
+     * jar file itself).
      * 
      * @param jarUrl the original URL
      * @return the URL for the actual jar file
@@ -285,9 +305,11 @@ public abstract class ResourceUtils {
     }
 
     /**
-     * Extract the URL for the outermost archive from the given jar/war URL (which may point to a resource in a jar file or to a jar file itself).
+     * Extract the URL for the outermost archive from the given jar/war URL (which may point to a resource in a jar file
+     * or to a jar file itself).
      * <p>
-     * In the case of a jar file nested within a war file, this will return a URL to the war file since that is the one resolvable in the file system.
+     * In the case of a jar file nested within a war file, this will return a URL to the war file since that is the one
+     * resolvable in the file system.
      * 
      * @param jarUrl the original URL
      * @return the URL for the actual jar file
@@ -336,8 +358,8 @@ public abstract class ResourceUtils {
     }
 
     /**
-     * Set the {@link URLConnection#setUseCaches "useCaches"} flag on the given connection, preferring {@code false} but leaving the flag at {@code true} for
-     * JNLP based resources.
+     * Set the {@link URLConnection#setUseCaches "useCaches"} flag on the given connection, preferring {@code false} but
+     * leaving the flag at {@code true} for JNLP based resources.
      * 
      * @param con the URLConnection to set the flag on
      */

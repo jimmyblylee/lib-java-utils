@@ -28,15 +28,16 @@ import java.util.Map;
 import java.util.TreeSet;
 
 /**
- * Represents a MIME Type, as originally defined in RFC 2046 and subsequently used in other Internet protocols including HTTP.
+ * Represents a MIME Type, as originally defined in RFC 2046 and subsequently used in other Internet protocols including
+ * HTTP.
  *
  * <p>
- * This class, however, does not contain support for the q-parameters used in HTTP content negotiation. Those can be found in the sub-class
- * {@code org.springframework.http.MediaType} in the {@code spring-web} module.
+ * This class, however, does not contain support for the q-parameters used in HTTP content negotiation. Those can be
+ * found in the sub-class {@code org.springframework.http.MediaType} in the {@code spring-web} module.
  *
  * <p>
- * Consists of a {@linkplain #getType() type} and a {@linkplain #getSubtype() subtype}. Also has functionality to parse media types from a string using
- * {@link #valueOf(String)}. For more parsing options see {@link MimeTypeUtils}.
+ * Consists of a {@linkplain #getType() type} and a {@linkplain #getSubtype() subtype}. Also has functionality to parse
+ * media types from a string using {@link #valueOf(String)}. For more parsing options see {@link MimeTypeUtils}.
  *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
@@ -134,7 +135,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
     }
 
     /**
-     * Copy-constructor that copies the type and subtype of the given {@code MimeType}, and allows for different parameter.
+     * Copy-constructor that copies the type and subtype of the given {@code MimeType}, and allows for different
+     * parameter.
      * 
      * @param other the other media type
      * @param parameters the parameters, may be {@code null}
@@ -182,7 +184,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
     private void checkToken(String token) {
         for (int i = 0; i < token.length(); i++) {
             char ch = token.charAt(i);
-            if (!TOKEN.get(ch)) { throw new IllegalArgumentException("Invalid token character '" + ch + "' in token \"" + token + "\""); }
+            if (!TOKEN.get(ch)) { throw new IllegalArgumentException(
+                    "Invalid token character '" + ch + "' in token \"" + token + "\""); }
         }
     }
 
@@ -213,6 +216,7 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 
     /**
      * Indicates whether the {@linkplain #getType() type} is the wildcard character <code>&#42;</code> or not.
+     * 
      * @return whether the {@linkplain #getType() type} is the wildcard character <code>&#42;</code>
      */
     public boolean isWildcardType() {
@@ -220,8 +224,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
     }
 
     /**
-     * Indicates whether the {@linkplain #getSubtype() subtype} is the wildcard character <code>&#42;</code> or the wildcard character followed by a suffix
-     * (e.g. <code>&#42;+xml</code>).
+     * Indicates whether the {@linkplain #getSubtype() subtype} is the wildcard character <code>&#42;</code> or the
+     * wildcard character followed by a suffix (e.g. <code>&#42;+xml</code>).
      * 
      * @return whether the subtype is a wildcard
      */
@@ -230,7 +234,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
     }
 
     /**
-     * Indicates whether this media type is concrete, i.e. whether neither the type nor the subtype is a wildcard character <code>&#42;</code>.
+     * Indicates whether this media type is concrete, i.e. whether neither the type nor the subtype is a wildcard
+     * character <code>&#42;</code>.
      * 
      * @return whether this media type is concrete
      */
@@ -240,6 +245,7 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 
     /**
      * Return the primary type.
+     * 
      * @return the primary type.
      */
     public String getType() {
@@ -248,6 +254,7 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 
     /**
      * Return the subtype.
+     * 
      * @return the subtype.
      */
     public String getSubtype() {
@@ -286,8 +293,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
     /**
      * Indicate whether this {@code MediaType} includes the given media type.
      * <p>
-     * For instance, {@code text/*} includes {@code text/plain} and {@code text/html}, and {@code application/*+xml} includes {@code application/soap+xml}, etc.
-     * This method is <b>not</b> symmetric.
+     * For instance, {@code text/*} includes {@code text/plain} and {@code text/html}, and {@code application/*+xml}
+     * includes {@code application/soap+xml}, etc. This method is <b>not</b> symmetric.
      * 
      * @param other the reference media type with which to compare
      * @return {@code true} if this media type includes the given media type; {@code false} otherwise
@@ -311,7 +318,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
                         String thisSubtypeNoSuffix = getSubtype().substring(0, thisPlusIdx);
                         String thisSubtypeSuffix = getSubtype().substring(thisPlusIdx + 1);
                         String otherSubtypeSuffix = other.getSubtype().substring(otherPlusIdx + 1);
-                        if (thisSubtypeSuffix.equals(otherSubtypeSuffix) && WILDCARD_TYPE.equals(thisSubtypeNoSuffix)) { return true; }
+                        if (thisSubtypeSuffix.equals(otherSubtypeSuffix)
+                                && WILDCARD_TYPE.equals(thisSubtypeNoSuffix)) { return true; }
                     }
                 }
             }
@@ -322,8 +330,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
     /**
      * Indicate whether this {@code MediaType} is compatible with the given media type.
      * <p>
-     * For instance, {@code text/*} is compatible with {@code text/plain}, {@code text/html}, and vice versa. In effect, this method is similar to
-     * {@link #includes}, except that it <b>is</b> symmetric.
+     * For instance, {@code text/*} is compatible with {@code text/plain}, {@code text/html}, and vice versa. In effect,
+     * this method is similar to {@link #includes}, except that it <b>is</b> symmetric.
      * 
      * @param other the reference media type with which to compare
      * @return {@code true} if this media type is compatible with the given media type; {@code false} otherwise
@@ -349,8 +357,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
                     String thisSubtypeSuffix = getSubtype().substring(thisPlusIdx + 1);
                     String otherSubtypeSuffix = other.getSubtype().substring(otherPlusIdx + 1);
 
-                    if (thisSubtypeSuffix.equals(otherSubtypeSuffix)
-                            && (WILDCARD_TYPE.equals(thisSubtypeNoSuffix) || WILDCARD_TYPE.equals(otherSubtypeNoSuffix))) { return true; }
+                    if (thisSubtypeSuffix.equals(otherSubtypeSuffix) && (WILDCARD_TYPE.equals(thisSubtypeNoSuffix)
+                            || WILDCARD_TYPE.equals(otherSubtypeNoSuffix))) { return true; }
                 }
             }
         }
@@ -398,12 +406,13 @@ public class MimeType implements Comparable<MimeType>, Serializable {
         if (this == other) { return true; }
         if (!(other instanceof MimeType)) { return false; }
         MimeType otherType = (MimeType) other;
-        return (this.type.equalsIgnoreCase(otherType.type) && this.subtype.equalsIgnoreCase(otherType.subtype) && parametersAreEqual(otherType));
+        return (this.type.equalsIgnoreCase(otherType.type) && this.subtype.equalsIgnoreCase(otherType.subtype)
+                && parametersAreEqual(otherType));
     }
 
     /**
-     * Determine if the parameters in this {@code MimeType} and the supplied {@code MimeType} are equal, performing case-insensitive comparisons for
-     * {@link Charset}s.
+     * Determine if the parameters in this {@code MimeType} and the supplied {@code MimeType} are equal, performing
+     * case-insensitive comparisons for {@link Charset}s.
      * 
      * @since 4.2
      */
@@ -415,7 +424,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 
             if (PARAM_CHARSET.equals(key)) {
                 if (!ObjectUtils.nullSafeEquals(this.getCharSet(), that.getCharSet())) { return false; }
-            } else if (!ObjectUtils.nullSafeEquals(this.parameters.get(key), that.parameters.get(key))) { return false; }
+            } else if (!ObjectUtils.nullSafeEquals(this.parameters.get(key),
+                    that.parameters.get(key))) { return false; }
         }
 
         return true;
@@ -453,8 +463,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
     }
 
     /**
-     * Parse the given String value into a {@code MimeType} object, with this method name following the 'valueOf' naming convention (as supported by
-     * {@code org.springframework.core.convert.ConversionService}.
+     * Parse the given String value into a {@code MimeType} object, with this method name following the 'valueOf' naming
+     * convention (as supported by {@code org.springframework.core.convert.ConversionService}.
      * 
      * @param value value
      * @return MimeType
@@ -490,7 +500,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
         protected int compareParameters(T mimeType1, T mimeType2) {
             int paramsSize1 = mimeType1.getParameters().size();
             int paramsSize2 = mimeType2.getParameters().size();
-            return (paramsSize2 < paramsSize1 ? -1 : (paramsSize2 == paramsSize1 ? 0 : 1)); // audio/basic;level=1 < audio/basic
+            return (paramsSize2 < paramsSize1 ? -1 : (paramsSize2 == paramsSize1 ? 0 : 1)); // audio/basic;level=1 <
+                                                                                            // audio/basic
         }
     }
 

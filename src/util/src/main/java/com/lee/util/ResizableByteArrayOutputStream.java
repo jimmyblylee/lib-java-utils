@@ -21,15 +21,16 @@ import java.io.ByteArrayOutputStream;
 /**
  * An extension of {@link java.io.ByteArrayOutputStream} that:
  * <ul>
- * <li>has public {@link com.lee.util.ResizableByteArrayOutputStream#grow(int)} and {@link com.lee.util.ResizableByteArrayOutputStream#resize(int)} methods to
- * get more control over the the size of the internal buffer</li>
+ * <li>has public {@link com.lee.util.ResizableByteArrayOutputStream#grow(int)} and
+ * {@link com.lee.util.ResizableByteArrayOutputStream#resize(int)} methods to get more control over the the size of the
+ * internal buffer</li>
  * <li>has a higher initial capacity (256) by default</li>
  * </ul>
  *
  * <p>
- * As of 4.2, this class has been superseded by {@link FastByteArrayOutputStream} for Spring's internal use where no assignability to
- * {@link ByteArrayOutputStream} is needed (since {@link FastByteArrayOutputStream} is more efficient with buffer resize management but doesn't extend the
- * standard {@link ByteArrayOutputStream}).
+ * As of 4.2, this class has been superseded by {@link FastByteArrayOutputStream} for Spring's internal use where no
+ * assignability to {@link ByteArrayOutputStream} is needed (since {@link FastByteArrayOutputStream} is more efficient
+ * with buffer resize management but doesn't extend the standard {@link ByteArrayOutputStream}).
  *
  * @author Brian Clozel
  * @author Juergen Hoeller
@@ -61,7 +62,8 @@ public class ResizableByteArrayOutputStream extends ByteArrayOutputStream {
      * Resize the internal buffer size to a specified capacity.
      * 
      * @param targetCapacity the desired size of the buffer
-     * @throws IllegalArgumentException if the given capacity is smaller than the actual size of the content stored in the buffer already
+     * @throws IllegalArgumentException if the given capacity is smaller than the actual size of the content stored in
+     *             the buffer already
      * @see ResizableByteArrayOutputStream#size()
      */
     public synchronized void resize(int targetCapacity) {
@@ -87,6 +89,7 @@ public class ResizableByteArrayOutputStream extends ByteArrayOutputStream {
 
     /**
      * Return the current size of this stream's internal buffer.
+     * 
      * @return the current size of this stream's internal buffer.
      */
     public synchronized int capacity() {

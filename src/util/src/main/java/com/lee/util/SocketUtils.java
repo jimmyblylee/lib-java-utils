@@ -25,10 +25,12 @@ import java.util.TreeSet;
 import javax.net.ServerSocketFactory;
 
 /**
- * Simple utility methods for working with network sockets &mdash; for example, for finding available ports on {@code localhost}.
+ * Simple utility methods for working with network sockets &mdash; for example, for finding available ports on
+ * {@code localhost}.
  *
  * <p>
- * Within this class, a TCP port refers to a port for a {@link ServerSocket}; whereas, a UDP port refers to a port for a {@link DatagramSocket}.
+ * Within this class, a TCP port refers to a port for a {@link ServerSocket}; whereas, a UDP port refers to a port for a
+ * {@link DatagramSocket}.
  *
  * @author Sam Brannen
  * @author Ben Hale
@@ -52,17 +54,20 @@ public class SocketUtils {
     private static final Random random = new Random(System.currentTimeMillis());
 
     /**
-     * Although {@code SocketUtils} consists solely of static utility methods, this constructor is intentionally {@code public}.
+     * Although {@code SocketUtils} consists solely of static utility methods, this constructor is intentionally
+     * {@code public}.
      * <h3>Rationale</h3>
      * <p>
-     * Static methods from this class may be invoked from within XML configuration files using the Spring Expression Language (SpEL) and the following syntax.
+     * Static methods from this class may be invoked from within XML configuration files using the Spring Expression
+     * Language (SpEL) and the following syntax.
      * 
      * <pre>
      * <code>&lt;bean id="bean1" ... p:port="#{T(org.springframework.util.SocketUtils).findAvailableTcpPort(12000)}" /&gt;</code>
      * </pre>
      * 
-     * If this constructor were {@code private}, you would be required to supply the fully qualified class name to SpEL's {@code T()} function for each usage.
-     * Thus, the fact that this constructor is {@code public} allows you to reduce boilerplate configuration with SpEL as can be seen in the following example.
+     * If this constructor were {@code private}, you would be required to supply the fully qualified class name to
+     * SpEL's {@code T()} function for each usage. Thus, the fact that this constructor is {@code public} allows you to
+     * reduce boilerplate configuration with SpEL as can be seen in the following example.
      * 
      * <pre>
      * <code>&lt;bean id="socketUtils" class="org.springframework.util.SocketUtils" /&gt;
@@ -108,7 +113,8 @@ public class SocketUtils {
     }
 
     /**
-     * Find the requested number of available TCP ports, each randomly selected from the range [{@value #PORT_RANGE_MIN}, {@value #PORT_RANGE_MAX}].
+     * Find the requested number of available TCP ports, each randomly selected from the range
+     * [{@value #PORT_RANGE_MIN}, {@value #PORT_RANGE_MAX}].
      * 
      * @param numRequested the number of available ports to find
      * @return a sorted set of available TCP port numbers
@@ -119,7 +125,8 @@ public class SocketUtils {
     }
 
     /**
-     * Find the requested number of available TCP ports, each randomly selected from the range [{@code minPort}, {@code maxPort}].
+     * Find the requested number of available TCP ports, each randomly selected from the range [{@code minPort},
+     * {@code maxPort}].
      * 
      * @param numRequested the number of available ports to find
      * @param minPort the minimum port number
@@ -165,7 +172,8 @@ public class SocketUtils {
     }
 
     /**
-     * Find the requested number of available UDP ports, each randomly selected from the range [{@value #PORT_RANGE_MIN}, {@value #PORT_RANGE_MAX}].
+     * Find the requested number of available UDP ports, each randomly selected from the range
+     * [{@value #PORT_RANGE_MIN}, {@value #PORT_RANGE_MAX}].
      * 
      * @param numRequested the number of available ports to find
      * @return a sorted set of available UDP port numbers
@@ -176,7 +184,8 @@ public class SocketUtils {
     }
 
     /**
-     * Find the requested number of available UDP ports, each randomly selected from the range [{@code minPort}, {@code maxPort}].
+     * Find the requested number of available UDP ports, each randomly selected from the range [{@code minPort},
+     * {@code maxPort}].
      * 
      * @param numRequested the number of available ports to find
      * @param minPort the minimum port number
@@ -194,7 +203,8 @@ public class SocketUtils {
             @Override
             protected boolean isPortAvailable(int port) {
                 try {
-                    ServerSocket serverSocket = ServerSocketFactory.getDefault().createServerSocket(port, 1, InetAddress.getByName("localhost"));
+                    ServerSocket serverSocket = ServerSocketFactory.getDefault().createServerSocket(port, 1,
+                            InetAddress.getByName("localhost"));
                     serverSocket.close();
                     return true;
                 } catch (Exception ex) {
@@ -234,7 +244,8 @@ public class SocketUtils {
         }
 
         /**
-         * Find an available port for this {@code SocketType}, randomly selected from the range [{@code minPort}, {@code maxPort}].
+         * Find an available port for this {@code SocketType}, randomly selected from the range [{@code minPort},
+         * {@code maxPort}].
          * 
          * @param minPort the minimum port number
          * @param maxPort the maximum port number
@@ -250,8 +261,9 @@ public class SocketUtils {
             int candidatePort;
             int searchCounter = 0;
             do {
-                if (++searchCounter > portRange) { throw new IllegalStateException(String
-                        .format("Could not find an available %s port in the range [%d, %d] after %d attempts", name(), minPort, maxPort, searchCounter)); }
+                if (++searchCounter > portRange) { throw new IllegalStateException(
+                        String.format("Could not find an available %s port in the range [%d, %d] after %d attempts",
+                                name(), minPort, maxPort, searchCounter)); }
                 candidatePort = findRandomPort(minPort, maxPort);
             } while (!isPortAvailable(candidatePort));
 
@@ -259,7 +271,8 @@ public class SocketUtils {
         }
 
         /**
-         * Find the requested number of available ports for this {@code SocketType}, each randomly selected from the range [{@code minPort}, {@code maxPort}].
+         * Find the requested number of available ports for this {@code SocketType}, each randomly selected from the
+         * range [{@code minPort}, {@code maxPort}].
          * 
          * @param numRequested the number of available ports to find
          * @param minPort the minimum port number
@@ -272,7 +285,8 @@ public class SocketUtils {
             Assert.isTrue(maxPort > minPort, "'maxPort' must be greater than 'minPort'");
             Assert.isTrue(maxPort <= PORT_RANGE_MAX, "'maxPort' must be less than or equal to " + PORT_RANGE_MAX);
             Assert.isTrue(numRequested > 0, "'numRequested' must be greater than 0");
-            Assert.isTrue((maxPort - minPort) >= numRequested, "'numRequested' must not be greater than 'maxPort' - 'minPort'");
+            Assert.isTrue((maxPort - minPort) >= numRequested,
+                    "'numRequested' must not be greater than 'maxPort' - 'minPort'");
 
             final SortedSet<Integer> availablePorts = new TreeSet<Integer>();
             int attemptCount = 0;
@@ -281,7 +295,8 @@ public class SocketUtils {
             }
 
             if (availablePorts.size() != numRequested) { throw new IllegalStateException(
-                    String.format("Could not find %d available %s ports in the range [%d, %d]", numRequested, name(), minPort, maxPort)); }
+                    String.format("Could not find %d available %s ports in the range [%d, %d]", numRequested, name(),
+                            minPort, maxPort)); }
 
             return availablePorts;
         }

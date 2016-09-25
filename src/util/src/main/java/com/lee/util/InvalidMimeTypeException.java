@@ -17,7 +17,8 @@
 package com.lee.util;
 
 /**
- * Exception thrown from {@link MimeTypeUtils#parseMimeType(String)} in case of encountering an invalid content type specification String.
+ * Exception thrown from {@link MimeTypeUtils#parseMimeType(String)} in case of encountering an invalid content type
+ * specification String.
  *
  * @author Juergen Hoeller
  * @author Rossen Stoyanchev
@@ -42,6 +43,7 @@ public class InvalidMimeTypeException extends IllegalArgumentException {
 
     /**
      * Return the offending content type.
+     * 
      * @return the offending content type.
      */
     public String getMimeType() {

@@ -104,8 +104,8 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
     }
 
     /**
-     * Convert a {@code QName} to a qualified name, as used by DOM and SAX. The returned string has a format of {@code prefix:localName} if the prefix is set,
-     * or just {@code localName} if not.
+     * Convert a {@code QName} to a qualified name, as used by DOM and SAX. The returned string has a format of
+     * {@code prefix:localName} if the prefix is set, or just {@code localName} if not.
      * 
      * @param qName the {@code QName}
      * @return the qualified name

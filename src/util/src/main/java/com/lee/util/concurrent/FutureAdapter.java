@@ -25,8 +25,8 @@ import com.lee.util.Assert;
 
 /**
  * Abstract class that adapts a {@link Future} parameterized over S into a {@code
- * Future} parameterized over T. All methods are delegated to the adaptee, where {@link #get()} and {@link #get(long, TimeUnit)} call {@link #adapt(Object)} on
- * the adaptee's result.
+ * Future} parameterized over T. All methods are delegated to the adaptee, where {@link #get()} and
+ * {@link #get(long, TimeUnit)} call {@link #adapt(Object)} on the adaptee's result.
  *
  * @author Arjen Poutsma
  * @since 4.0
@@ -55,6 +55,7 @@ public abstract class FutureAdapter<T, S> implements Future<T> {
 
     /**
      * Returns the adaptee.
+     * 
      * @return the adaptee.
      */
     protected Future<S> getAdaptee() {
@@ -120,7 +121,7 @@ public abstract class FutureAdapter<T, S> implements Future<T> {
      * Adapts the given adaptee's result into T.
      * 
      * @param adapteeResult adapteeResult
-
+     * 
      * @return the adapted result
      * @throws ExecutionException while there is an ExecutionException...
      */

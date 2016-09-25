@@ -20,12 +20,15 @@ import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Simple customizable helper class for creating new {@link Thread} instances. Provides various bean properties: thread name prefix, thread priority, etc.
+ * Simple customizable helper class for creating new {@link Thread} instances. Provides various bean properties: thread
+ * name prefix, thread priority, etc.
  *
  * <p>
- * Serves as base class for thread factories such as {@code org.springframework.scheduling.concurrent.CustomizableThreadFactory}.
+ * Serves as base class for thread factories such as
+ * {@code org.springframework.scheduling.concurrent.CustomizableThreadFactory}.
  *
  * {@code org.springframework.scheduling.concurrent.CustomizableThreadFactory}
+ * 
  * @author Juergen Hoeller
  * @since 2.0.3
  */
@@ -60,6 +63,7 @@ public class CustomizableThreadCreator implements Serializable {
 
     /**
      * Specify the prefix to use for the names of newly created threads. Default is "SimpleAsyncTaskExecutor-".
+     * 
      * @param threadNamePrefix threadNamePrefix
      */
     public void setThreadNamePrefix(String threadNamePrefix) {
@@ -68,6 +72,7 @@ public class CustomizableThreadCreator implements Serializable {
 
     /**
      * Return the thread name prefix to use for the names of newly created threads.
+     * 
      * @return thread name prefix
      */
     public String getThreadNamePrefix() {
@@ -76,6 +81,7 @@ public class CustomizableThreadCreator implements Serializable {
 
     /**
      * Set the priority of the threads that this factory creates. Default is 5.
+     * 
      * @param threadPriority threadPriority
      * 
      * @see java.lang.Thread#NORM_PRIORITY
@@ -86,6 +92,7 @@ public class CustomizableThreadCreator implements Serializable {
 
     /**
      * Return the priority of the threads that this factory creates.
+     * 
      * @return the priority of the threads
      */
     public int getThreadPriority() {
@@ -93,12 +100,14 @@ public class CustomizableThreadCreator implements Serializable {
     }
 
     /**
-     * Set whether this factory is supposed to create daemon threads, just executing as long as the application itself is running.
+     * Set whether this factory is supposed to create daemon threads, just executing as long as the application itself
+     * is running.
      * <p>
-     * Default is "false": Concrete factories usually support explicit cancelling. Hence, if the application shuts down, Runnables will by default finish their
-     * execution.
+     * Default is "false": Concrete factories usually support explicit cancelling. Hence, if the application shuts down,
+     * Runnables will by default finish their execution.
      * <p>
-     * Specify "true" for eager shutdown of threads which still actively execute a {@link Runnable} at the time that the application itself shuts down.
+     * Specify "true" for eager shutdown of threads which still actively execute a {@link Runnable} at the time that the
+     * application itself shuts down.
      * 
      * @param daemon daemon
      * @see java.lang.Thread#setDaemon
@@ -109,6 +118,7 @@ public class CustomizableThreadCreator implements Serializable {
 
     /**
      * Return whether this factory should create daemon threads.
+     * 
      * @return this factory should create daemon threads.
      */
     public boolean isDaemon() {
@@ -137,6 +147,7 @@ public class CustomizableThreadCreator implements Serializable {
 
     /**
      * Return the thread group that threads should be created in (or {@code null} for the default group).
+     * 
      * @return the thread group
      */
     public ThreadGroup getThreadGroup() {
@@ -146,7 +157,8 @@ public class CustomizableThreadCreator implements Serializable {
     /**
      * Template method for the creation of a new {@link Thread}.
      * <p>
-     * The default implementation creates a new Thread for the given {@link Runnable}, applying an appropriate thread name.
+     * The default implementation creates a new Thread for the given {@link Runnable}, applying an appropriate thread
+     * name.
      * 
      * @param runnable the Runnable to execute
      * @see #nextThreadName()
@@ -162,7 +174,8 @@ public class CustomizableThreadCreator implements Serializable {
     /**
      * Return the thread name to use for a newly created {@link Thread}.
      * <p>
-     * The default implementation returns the specified thread name prefix with an increasing thread count appended: e.g. "SimpleAsyncTaskExecutor-0".
+     * The default implementation returns the specified thread name prefix with an increasing thread count appended:
+     * e.g. "SimpleAsyncTaskExecutor-0".
      * 
      * @see #getThreadNamePrefix()
      * @return getThreadNamePrefix() + this.threadCount.incrementAndGet()

@@ -128,7 +128,8 @@ public class ListenableFutureCallbackRegistry<T> {
     }
 
     /**
-     * Trigger a {@link ListenableFutureCallback#onFailure(Throwable)} call on all added callbacks with the given {@code Throwable}.
+     * Trigger a {@link ListenableFutureCallback#onFailure(Throwable)} call on all added callbacks with the given
+     * {@code Throwable}.
      * 
      * @param ex the exception to trigger the callbacks with
      */

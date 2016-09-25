@@ -17,7 +17,8 @@
 package com.lee.util.backoff;
 
 /**
- * A simple {@link BackOff} implementation that provides a fixed interval between two attempts and a maximum number of retries.
+ * A simple {@link BackOff} implementation that provides a fixed interval between two attempts and a maximum number of
+ * retries.
  *
  * @author Stephane Nicoll
  * @since 4.1
@@ -56,6 +57,7 @@ public class FixedBackOff implements BackOff {
 
     /**
      * Set the interval between two attempts in milliseconds.
+     * 
      * @param interval interval
      */
     public void setInterval(long interval) {
@@ -64,6 +66,7 @@ public class FixedBackOff implements BackOff {
 
     /**
      * Return the interval between two attempts in milliseconds.
+     * 
      * @return the interval between two attempts in milliseconds.
      */
     public long getInterval() {
@@ -72,6 +75,7 @@ public class FixedBackOff implements BackOff {
 
     /**
      * Set the maximum number of attempts in milliseconds.
+     * 
      * @param maxAttempts maxAttempts
      */
     public void setMaxAttempts(long maxAttempts) {
@@ -80,6 +84,7 @@ public class FixedBackOff implements BackOff {
 
     /**
      * Return the maximum number of attempts in milliseconds.
+     * 
      * @return the maximum number of attempts in milliseconds.
      */
     public long getMaxAttempts() {
@@ -109,7 +114,8 @@ public class FixedBackOff implements BackOff {
         public String toString() {
             final StringBuilder sb = new StringBuilder("FixedBackOff{");
             sb.append("interval=").append(FixedBackOff.this.interval);
-            String attemptValue = (FixedBackOff.this.maxAttempts == Long.MAX_VALUE ? "unlimited" : String.valueOf(FixedBackOff.this.maxAttempts));
+            String attemptValue = (FixedBackOff.this.maxAttempts == Long.MAX_VALUE ? "unlimited"
+                    : String.valueOf(FixedBackOff.this.maxAttempts));
             sb.append(", currentAttempts=").append(this.currentAttempts);
             sb.append(", maxAttempts=").append(attemptValue);
             sb.append('}');

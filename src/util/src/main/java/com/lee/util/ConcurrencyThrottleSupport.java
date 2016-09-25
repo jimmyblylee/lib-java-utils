@@ -27,13 +27,14 @@ import org.apache.commons.logging.LogFactory;
  * Support class for throttling concurrent access to a specific resource.
  *
  * <p>
- * Designed for use as a base class, with the subclass invoking the {@link #beforeAccess()} and {@link #afterAccess()} methods at appropriate points of its
- * workflow. Note that {@code afterAccess} should usually be called in a finally block!
+ * Designed for use as a base class, with the subclass invoking the {@link #beforeAccess()} and {@link #afterAccess()}
+ * methods at appropriate points of its workflow. Note that {@code afterAccess} should usually be called in a finally
+ * block!
  *
  * <p>
- * The default concurrency limit of this support class is -1 ("unbounded concurrency"). Subclasses may override this default; check the javadoc of the concrete
- * class that you're using.
- * {@code org.springframework.aop.interceptor.ConcurrencyThrottleInterceptor} 
+ * The default concurrency limit of this support class is -1 ("unbounded concurrency"). Subclasses may override this
+ * default; check the javadoc of the concrete class that you're using.
+ * {@code org.springframework.aop.interceptor.ConcurrencyThrottleInterceptor}
  *
  * @author Juergen Hoeller
  * @since 1.2.5
@@ -69,8 +70,8 @@ public abstract class ConcurrencyThrottleSupport implements Serializable {
      * <p>
      * In principle, this limit can be changed at runtime, although it is generally designed as a config time setting.
      * <p>
-     * NOTE: Do not switch between -1 and any concrete limit at runtime, as this will lead to inconsistent concurrency counts: A limit of -1 effectively turns
-     * off concurrency counting completely.
+     * NOTE: Do not switch between -1 and any concrete limit at runtime, as this will lead to inconsistent concurrency
+     * counts: A limit of -1 effectively turns off concurrency counting completely.
      *
      * @param concurrencyLimit concurrencyLimit
      */
@@ -113,9 +114,11 @@ public abstract class ConcurrencyThrottleSupport implements Serializable {
                 boolean interrupted = false;
                 while (this.concurrencyCount >= this.concurrencyLimit) {
                     if (interrupted) { throw new IllegalStateException(
-                            "Thread was interrupted while waiting for invocation access, " + "but concurrency limit still does not allow for entering"); }
+                            "Thread was interrupted while waiting for invocation access, "
+                                    + "but concurrency limit still does not allow for entering"); }
                     if (debug) {
-                        logger.debug("Concurrency count " + this.concurrencyCount + " has reached limit " + this.concurrencyLimit + " - blocking");
+                        logger.debug("Concurrency count " + this.concurrencyCount + " has reached limit "
+                                + this.concurrencyLimit + " - blocking");
                     }
                     try {
                         this.monitor.wait();

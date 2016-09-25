@@ -22,8 +22,8 @@ import java.util.Comparator;
 import com.lee.util.Assert;
 
 /**
- * A decorator for a comparator, with an "ascending" flag denoting whether comparison results should be treated in forward (standard ascending) order or flipped
- * for reverse (descending) order.
+ * A decorator for a comparator, with an "ascending" flag denoting whether comparison results should be treated in
+ * forward (standard ascending) order or flipped for reverse (descending) order.
  *
  * @author Keith Donald
  * @author Juergen Hoeller
@@ -37,7 +37,8 @@ public class InvertibleComparator<T> implements Comparator<T>, Serializable {
     private boolean ascending = true;
 
     /**
-     * Create an InvertibleComparator that sorts ascending by default. For the actual comparison, the specified Comparator will be used.
+     * Create an InvertibleComparator that sorts ascending by default. For the actual comparison, the specified
+     * Comparator will be used.
      * 
      * @param comparator the comparator to decorate
      */
@@ -47,7 +48,8 @@ public class InvertibleComparator<T> implements Comparator<T>, Serializable {
     }
 
     /**
-     * Create an InvertibleComparator that sorts based on the provided order. For the actual comparison, the specified Comparator will be used.
+     * Create an InvertibleComparator that sorts based on the provided order. For the actual comparison, the specified
+     * Comparator will be used.
      * 
      * @param comparator the comparator to decorate
      * @param ascending the sort order: ascending (true) or descending (false)
@@ -60,6 +62,7 @@ public class InvertibleComparator<T> implements Comparator<T>, Serializable {
 
     /**
      * Specify the sort order: ascending (true) or descending (false).
+     * 
      * @param ascending ascending
      */
     public void setAscending(boolean ascending) {
@@ -68,6 +71,7 @@ public class InvertibleComparator<T> implements Comparator<T>, Serializable {
 
     /**
      * Return the sort order: ascending (true) or descending (false).
+     * 
      * @return the sort order: ascending (true) or descending (false).
      */
     public boolean isAscending() {

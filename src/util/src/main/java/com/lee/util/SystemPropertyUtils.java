@@ -20,8 +20,8 @@ package com.lee.util;
  * Helper class for resolving placeholders in texts. Usually applied to file paths.
  *
  * <p>
- * A text may contain {@code ${...}} placeholders, to be resolved as system properties: e.g. {@code ${user.dir}}. Default values can be supplied using the ":"
- * separator between key and value.
+ * A text may contain {@code ${...}} placeholders, to be resolved as system properties: e.g. {@code ${user.dir}}.
+ * Default values can be supplied using the ":" separator between key and value.
  *
  * @author Juergen Hoeller
  * @author Rob Harrop
@@ -42,10 +42,11 @@ public abstract class SystemPropertyUtils {
     /** Value separator for system property placeholders: ":" */
     public static final String VALUE_SEPARATOR = ":";
 
-    private static final PropertyPlaceholderHelper strictHelper = new PropertyPlaceholderHelper(PLACEHOLDER_PREFIX, PLACEHOLDER_SUFFIX, VALUE_SEPARATOR, false);
+    private static final PropertyPlaceholderHelper strictHelper = new PropertyPlaceholderHelper(PLACEHOLDER_PREFIX,
+            PLACEHOLDER_SUFFIX, VALUE_SEPARATOR, false);
 
-    private static final PropertyPlaceholderHelper nonStrictHelper = new PropertyPlaceholderHelper(PLACEHOLDER_PREFIX, PLACEHOLDER_SUFFIX, VALUE_SEPARATOR,
-            true);
+    private static final PropertyPlaceholderHelper nonStrictHelper = new PropertyPlaceholderHelper(PLACEHOLDER_PREFIX,
+            PLACEHOLDER_SUFFIX, VALUE_SEPARATOR, true);
 
     /**
      * Resolve {@code ${...}} placeholders in the given text, replacing them with corresponding system property values.
@@ -61,15 +62,17 @@ public abstract class SystemPropertyUtils {
     }
 
     /**
-     * Resolve {@code ${...}} placeholders in the given text, replacing them with corresponding system property values. Unresolvable placeholders with no
-     * default value are ignored and passed through unchanged if the flag is set to {@code true}.
+     * Resolve {@code ${...}} placeholders in the given text, replacing them with corresponding system property values.
+     * Unresolvable placeholders with no default value are ignored and passed through unchanged if the flag is set to
+     * {@code true}.
      * 
      * @param text the String to resolve
      * @param ignoreUnresolvablePlaceholders whether unresolved placeholders are to be ignored
      * @return the resolved String
      * @see #PLACEHOLDER_PREFIX
      * @see #PLACEHOLDER_SUFFIX
-     * @throws IllegalArgumentException if there is an unresolvable placeholder and the "ignoreUnresolvablePlaceholders" flag is {@code false}
+     * @throws IllegalArgumentException if there is an unresolvable placeholder and the "ignoreUnresolvablePlaceholders"
+     *             flag is {@code false}
      */
     public static String resolvePlaceholders(String text, boolean ignoreUnresolvablePlaceholders) {
         PropertyPlaceholderHelper helper = (ignoreUnresolvablePlaceholders ? nonStrictHelper : strictHelper);
@@ -97,7 +100,8 @@ public abstract class SystemPropertyUtils {
                 }
                 return propVal;
             } catch (Throwable ex) {
-                System.err.println("Could not resolve placeholder '" + placeholderName + "' in [" + this.text + "] as system property: " + ex);
+                System.err.println("Could not resolve placeholder '" + placeholderName + "' in [" + this.text
+                        + "] as system property: " + ex);
                 return null;
             }
         }

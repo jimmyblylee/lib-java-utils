@@ -28,7 +28,8 @@ import java.util.Set;
 /**
  * Miscellaneous utility methods for number conversion and parsing.
  * <p>
- * Mainly for internal use within the framework; consider Apache's Commons Lang for a more comprehensive suite of number utilities.
+ * Mainly for internal use within the framework; consider Apache's Commons Lang for a more comprehensive suite of number
+ * utilities.
  *
  * @author Juergen Hoeller
  * @author Rob Harrop
@@ -65,7 +66,8 @@ public abstract class NumberUtils {
      * @param number the number to convert
      * @param targetClass the target class to convert to
      * @return the converted number
-     * @throws IllegalArgumentException if the target class is not supported (i.e. not a standard Number subclass as included in the JDK)
+     * @throws IllegalArgumentException if the target class is not supported (i.e. not a standard Number subclass as
+     *             included in the JDK)
      * @see java.lang.Byte
      * @see java.lang.Short
      * @see java.lang.Integer
@@ -76,7 +78,8 @@ public abstract class NumberUtils {
      * @see java.math.BigDecimal
      */
     @SuppressWarnings("unchecked")
-    public static <T extends Number> T convertNumberToTargetClass(Number number, Class<T> targetClass) throws IllegalArgumentException {
+    public static <T extends Number> T convertNumberToTargetClass(Number number, Class<T> targetClass)
+            throws IllegalArgumentException {
 
         Assert.notNull(number, "Number must not be null");
         Assert.notNull(targetClass, "Target class must not be null");
@@ -130,8 +133,8 @@ public abstract class NumberUtils {
             // (see BigDecimal javadoc for details)
             return (T) new BigDecimal(number.toString());
         } else {
-            throw new IllegalArgumentException("Could not convert number [" + number + "] of type [" + number.getClass().getName()
-                    + "] to unsupported target class [" + targetClass.getName() + "]");
+            throw new IllegalArgumentException("Could not convert number [" + number + "] of type ["
+                    + number.getClass().getName() + "] to unsupported target class [" + targetClass.getName() + "]");
         }
     }
 
@@ -143,12 +146,13 @@ public abstract class NumberUtils {
      * @throws IllegalArgumentException
      */
     private static void raiseOverflowException(Number number, Class<?> targetClass) {
-        throw new IllegalArgumentException("Could not convert number [" + number + "] of type [" + number.getClass().getName() + "] to target class ["
-                + targetClass.getName() + "]: overflow");
+        throw new IllegalArgumentException("Could not convert number [" + number + "] of type ["
+                + number.getClass().getName() + "] to target class [" + targetClass.getName() + "]: overflow");
     }
 
     /**
-     * Parse the given {@code text} into a {@link Number} instance of the given target class, using the corresponding {@code decode} / {@code valueOf} method.
+     * Parse the given {@code text} into a {@link Number} instance of the given target class, using the corresponding
+     * {@code decode} / {@code valueOf} method.
      * <p>
      * Trims the input {@code String} before attempting to parse the number.
      * <p>
@@ -158,7 +162,8 @@ public abstract class NumberUtils {
      * @param text the text to convert
      * @param targetClass the target class to parse into
      * @return the parsed number
-     * @throws IllegalArgumentException if the target class is not supported (i.e. not a standard Number subclass as included in the JDK)
+     * @throws IllegalArgumentException if the target class is not supported (i.e. not a standard Number subclass as
+     *             included in the JDK)
      * @see Byte#decode
      * @see Short#decode
      * @see Integer#decode
@@ -191,21 +196,25 @@ public abstract class NumberUtils {
         } else if (BigDecimal.class == targetClass || Number.class == targetClass) {
             return (T) new BigDecimal(trimmed);
         } else {
-            throw new IllegalArgumentException("Cannot convert String [" + text + "] to target class [" + targetClass.getName() + "]");
+            throw new IllegalArgumentException(
+                    "Cannot convert String [" + text + "] to target class [" + targetClass.getName() + "]");
         }
     }
 
     /**
-     * Parse the given {@code text} into a {@link Number} instance of the given target class, using the supplied {@link NumberFormat}.
+     * Parse the given {@code text} into a {@link Number} instance of the given target class, using the supplied
+     * {@link NumberFormat}.
      * <p>
      * Trims the input {@code String} before attempting to parse the number.
      * 
      * @param <T> number type
      * @param text the text to convert
      * @param targetClass the target class to parse into
-     * @param numberFormat the {@code NumberFormat} to use for parsing (if {@code null}, this method falls back to {@link #parseNumber(String, Class)})
+     * @param numberFormat the {@code NumberFormat} to use for parsing (if {@code null}, this method falls back to
+     *            {@link #parseNumber(String, Class)})
      * @return the parsed number
-     * @throws IllegalArgumentException if the target class is not supported (i.e. not a standard Number subclass as included in the JDK)
+     * @throws IllegalArgumentException if the target class is not supported (i.e. not a standard Number subclass as
+     *             included in the JDK)
      * @see java.text.NumberFormat#parse
      * @see #convertNumberToTargetClass
      * @see #parseNumber(String, Class)
@@ -239,8 +248,8 @@ public abstract class NumberUtils {
     }
 
     /**
-     * Determine whether the given {@code value} String indicates a hex number, i.e. needs to be passed into {@code Integer.decode} instead of
-     * {@code Integer.valueOf}, etc.
+     * Determine whether the given {@code value} String indicates a hex number, i.e. needs to be passed into
+     * {@code Integer.decode} instead of {@code Integer.valueOf}, etc.
      */
     private static boolean isHexNumber(String value) {
         int index = (value.startsWith("-") ? 1 : 0);

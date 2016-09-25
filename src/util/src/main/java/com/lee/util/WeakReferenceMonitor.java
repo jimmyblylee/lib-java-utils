@@ -26,13 +26,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Track references to arbitrary objects using proxy and weak references. To monitor a handle, one should call {@link #monitor(Object, ReleaseListener)}, with
- * the given handle object usually being a holder that uses the target object underneath, and the release listener performing cleanup of the target object once
- * the handle is not strongly referenced anymore.
+ * Track references to arbitrary objects using proxy and weak references. To monitor a handle, one should call
+ * {@link #monitor(Object, ReleaseListener)}, with the given handle object usually being a holder that uses the target
+ * object underneath, and the release listener performing cleanup of the target object once the handle is not strongly
+ * referenced anymore.
  *
  * <p>
- * When a given handle becomes weakly reachable, the specified listener will be called by a background thread. This thread will only be started lazily and will
- * be stopped once no handles are registered for monitoring anymore, to be restarted if further handles are added.
+ * When a given handle becomes weakly reachable, the specified listener will be called by a background thread. This
+ * thread will only be started lazily and will be stopped once no handles are registered for monitoring anymore, to be
+ * restarted if further handles are added.
  *
  * <p>
  * Thanks to Tomasz Wysocki for the suggestion and the original implementation of this class!
@@ -56,7 +58,8 @@ public class WeakReferenceMonitor {
     private static Thread monitoringThread = null;
 
     /**
-     * Start to monitor given handle object for becoming weakly reachable. When the handle isn't used anymore, the given listener will be called.
+     * Start to monitor given handle object for becoming weakly reachable. When the handle isn't used anymore, the given
+     * listener will be called.
      * 
      * @param handle the object that will be monitored
      * @param listener the listener that will be called upon release of the handle
@@ -155,13 +158,14 @@ public class WeakReferenceMonitor {
     }
 
     /**
-     * Listener that is notified when the handle is being released. To be implemented by users of this reference monitor.
+     * Listener that is notified when the handle is being released. To be implemented by users of this reference
+     * monitor.
      */
     public static interface ReleaseListener {
 
         /**
-         * This callback method is invoked once the associated handle has been released, i.e. once there are no monitored strong references to the handle
-         * anymore.
+         * This callback method is invoked once the associated handle has been released, i.e. once there are no
+         * monitored strong references to the handle anymore.
          */
         void released();
     }

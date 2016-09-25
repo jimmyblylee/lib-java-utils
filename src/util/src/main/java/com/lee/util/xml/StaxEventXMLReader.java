@@ -45,8 +45,8 @@ import com.lee.util.Assert;
 import com.lee.util.StringUtils;
 
 /**
- * SAX {@code XMLReader} that reads from a StAX {@code XMLEventReader}. Consumes {@code XMLEvents} from an {@code XMLEventReader}, and calls the corresponding
- * methods on the SAX callback interfaces.
+ * SAX {@code XMLReader} that reads from a StAX {@code XMLEventReader}. Consumes {@code XMLEvents} from an
+ * {@code XMLEventReader}, and calls the corresponding methods on the SAX callback interfaces.
  *
  * @author Arjen Poutsma
  * @since 3.0
@@ -68,8 +68,9 @@ class StaxEventXMLReader extends AbstractStaxXMLReader {
     private String encoding;
 
     /**
-     * Constructs a new instance of the {@code StaxEventXmlReader} that reads from the given {@code XMLEventReader}. The supplied event reader must be in
-     * {@code XMLStreamConstants.START_DOCUMENT} or {@code XMLStreamConstants.START_ELEMENT} state.
+     * Constructs a new instance of the {@code StaxEventXmlReader} that reads from the given {@code XMLEventReader}. The
+     * supplied event reader must be in {@code XMLStreamConstants.START_DOCUMENT} or
+     * {@code XMLStreamConstants.START_ELEMENT} state.
      * 
      * @param reader the {@code XMLEventReader} to read from
      * @throws IllegalStateException if the reader is not at the start of a document or element
@@ -78,8 +79,9 @@ class StaxEventXMLReader extends AbstractStaxXMLReader {
         Assert.notNull(reader, "'reader' must not be null");
         try {
             XMLEvent event = reader.peek();
-            if (event != null && !(event.isStartDocument() || event.isStartElement())) { throw new IllegalStateException(
-                    "XMLEventReader not at start of document or element"); }
+            if (event != null
+                    && !(event.isStartDocument() || event.isStartElement())) { throw new IllegalStateException(
+                            "XMLEventReader not at start of document or element"); }
         } catch (XMLStreamException ex) {
             throw new IllegalStateException("Could not read first element: " + ex.getMessage());
         }
@@ -209,7 +211,8 @@ class StaxEventXMLReader extends AbstractStaxXMLReader {
                     startPrefixMapping(attributeName.getPrefix(), attributeName.getNamespaceURI());
                 }
 
-                getContentHandler().startElement(qName.getNamespaceURI(), qName.getLocalPart(), toQualifiedName(qName), getAttributes(startElement));
+                getContentHandler().startElement(qName.getNamespaceURI(), qName.getLocalPart(), toQualifiedName(qName),
+                        getAttributes(startElement));
             } else {
                 getContentHandler().startElement("", "", toQualifiedName(qName), getAttributes(startElement));
             }
@@ -263,8 +266,8 @@ class StaxEventXMLReader extends AbstractStaxXMLReader {
 
     private void handleEntityDeclaration(EntityDeclaration entityDeclaration) throws SAXException {
         if (getDTDHandler() != null) {
-            getDTDHandler().unparsedEntityDecl(entityDeclaration.getName(), entityDeclaration.getPublicId(), entityDeclaration.getSystemId(),
-                    entityDeclaration.getNotationName());
+            getDTDHandler().unparsedEntityDecl(entityDeclaration.getName(), entityDeclaration.getPublicId(),
+                    entityDeclaration.getSystemId(), entityDeclaration.getNotationName());
         }
     }
 
@@ -315,7 +318,8 @@ class StaxEventXMLReader extends AbstractStaxXMLReader {
             if (type == null) {
                 type = "CDATA";
             }
-            attributes.addAttribute(namespace, qName.getLocalPart(), toQualifiedName(qName), type, attribute.getValue());
+            attributes.addAttribute(namespace, qName.getLocalPart(), toQualifiedName(qName), type,
+                    attribute.getValue());
         }
         if (hasNamespacePrefixesFeature()) {
             for (Iterator i = event.getNamespaces(); i.hasNext();) {

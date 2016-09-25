@@ -22,8 +22,9 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * An {@link IdGenerator} that uses {@link SecureRandom} for the initial seed and {@link Random} thereafter, instead of calling {@link UUID#randomUUID()} every
- * time as {@link com.lee.util.JdkIdGenerator JdkIdGenerator} does. This provides a better balance between securely random ids and performance.
+ * An {@link IdGenerator} that uses {@link SecureRandom} for the initial seed and {@link Random} thereafter, instead of
+ * calling {@link UUID#randomUUID()} every time as {@link com.lee.util.JdkIdGenerator JdkIdGenerator} does. This
+ * provides a better balance between securely random ids and performance.
  *
  * @author Rossen Stoyanchev
  * @author Rob Winch

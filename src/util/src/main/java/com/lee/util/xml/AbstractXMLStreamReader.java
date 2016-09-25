@@ -33,18 +33,20 @@ abstract class AbstractXMLStreamReader implements XMLStreamReader {
 
     @Override
     public String getElementText() throws XMLStreamException {
-        if (getEventType() != XMLStreamConstants.START_ELEMENT) { throw new XMLStreamException("parser must be on START_ELEMENT to read next text",
-                getLocation()); }
+        if (getEventType() != XMLStreamConstants.START_ELEMENT) { throw new XMLStreamException(
+                "parser must be on START_ELEMENT to read next text", getLocation()); }
         int eventType = next();
         StringBuilder builder = new StringBuilder();
         while (eventType != XMLStreamConstants.END_ELEMENT) {
-            if (eventType == XMLStreamConstants.CHARACTERS || eventType == XMLStreamConstants.CDATA || eventType == XMLStreamConstants.SPACE
-                    || eventType == XMLStreamConstants.ENTITY_REFERENCE) {
+            if (eventType == XMLStreamConstants.CHARACTERS || eventType == XMLStreamConstants.CDATA
+                    || eventType == XMLStreamConstants.SPACE || eventType == XMLStreamConstants.ENTITY_REFERENCE) {
                 builder.append(getText());
-            } else if (eventType == XMLStreamConstants.PROCESSING_INSTRUCTION || eventType == XMLStreamConstants.COMMENT) {
+            } else if (eventType == XMLStreamConstants.PROCESSING_INSTRUCTION
+                    || eventType == XMLStreamConstants.COMMENT) {
                 // skipping
             } else if (eventType == XMLStreamConstants.END_DOCUMENT) {
-                throw new XMLStreamException("unexpected end of document when reading element text content", getLocation());
+                throw new XMLStreamException("unexpected end of document when reading element text content",
+                        getLocation());
             } else if (eventType == XMLStreamConstants.START_ELEMENT) {
                 throw new XMLStreamException("element text content may not contain START_ELEMENT", getLocation());
             } else {
@@ -89,8 +91,9 @@ abstract class AbstractXMLStreamReader implements XMLStreamReader {
     @Override
     public boolean hasText() {
         int eventType = getEventType();
-        return eventType == XMLStreamConstants.SPACE || eventType == XMLStreamConstants.CHARACTERS || eventType == XMLStreamConstants.COMMENT
-                || eventType == XMLStreamConstants.CDATA || eventType == XMLStreamConstants.ENTITY_REFERENCE;
+        return eventType == XMLStreamConstants.SPACE || eventType == XMLStreamConstants.CHARACTERS
+                || eventType == XMLStreamConstants.COMMENT || eventType == XMLStreamConstants.CDATA
+                || eventType == XMLStreamConstants.ENTITY_REFERENCE;
     }
 
     @Override
@@ -132,26 +135,30 @@ abstract class AbstractXMLStreamReader implements XMLStreamReader {
     @Override
     public int nextTag() throws XMLStreamException {
         int eventType = next();
-        while (eventType == XMLStreamConstants.CHARACTERS && isWhiteSpace() || eventType == XMLStreamConstants.CDATA && isWhiteSpace()
-                || eventType == XMLStreamConstants.SPACE || eventType == XMLStreamConstants.PROCESSING_INSTRUCTION || eventType == XMLStreamConstants.COMMENT) {
+        while (eventType == XMLStreamConstants.CHARACTERS && isWhiteSpace()
+                || eventType == XMLStreamConstants.CDATA && isWhiteSpace() || eventType == XMLStreamConstants.SPACE
+                || eventType == XMLStreamConstants.PROCESSING_INSTRUCTION || eventType == XMLStreamConstants.COMMENT) {
             eventType = next();
         }
         if (eventType != XMLStreamConstants.START_ELEMENT
-                && eventType != XMLStreamConstants.END_ELEMENT) { throw new XMLStreamException("expected start or end tag", getLocation()); }
+                && eventType != XMLStreamConstants.END_ELEMENT) { throw new XMLStreamException(
+                        "expected start or end tag", getLocation()); }
         return eventType;
     }
 
     @Override
     public void require(int expectedType, String namespaceURI, String localName) throws XMLStreamException {
         int eventType = getEventType();
-        if (eventType != expectedType) { throw new XMLStreamException("Expected [" + expectedType + "] but read [" + eventType + "]"); }
+        if (eventType != expectedType) { throw new XMLStreamException(
+                "Expected [" + expectedType + "] but read [" + eventType + "]"); }
     }
 
     @Override
     public String getAttributeValue(String namespaceURI, String localName) {
         for (int i = 0; i < getAttributeCount(); i++) {
             QName name = getAttributeName(i);
-            if (name.getLocalPart().equals(localName) && (namespaceURI == null || name.getNamespaceURI().equals(namespaceURI))) { return getAttributeValue(i); }
+            if (name.getLocalPart().equals(localName) && (namespaceURI == null
+                    || name.getNamespaceURI().equals(namespaceURI))) { return getAttributeValue(i); }
         }
         return null;
     }
@@ -172,7 +179,8 @@ abstract class AbstractXMLStreamReader implements XMLStreamReader {
     }
 
     @Override
-    public int getTextCharacters(int sourceStart, char[] target, int targetStart, int length) throws XMLStreamException {
+    public int getTextCharacters(int sourceStart, char[] target, int targetStart, int length)
+            throws XMLStreamException {
         char[] source = getTextCharacters();
         length = Math.min(length, source.length);
         System.arraycopy(source, sourceStart, target, targetStart, length);

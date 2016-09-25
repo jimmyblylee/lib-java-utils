@@ -25,7 +25,8 @@ import java.util.Set;
  * Composite iterator that combines multiple other iterators, as registered via {@link #add(Iterator)}.
  *
  * <p>
- * This implementation maintains a linked set of iterators which are invoked in sequence until all iterators are exhausted.
+ * This implementation maintains a linked set of iterators which are invoked in sequence until all iterators are
+ * exhausted.
  *
  * @author Erwin Vervaet
  * @author Juergen Hoeller
@@ -39,11 +40,13 @@ public class CompositeIterator<E> implements Iterator<E> {
 
     /**
      * Add given iterator to this composite.
+     * 
      * @param iterator iterator
      */
-    public  void add(Iterator<E> iterator) {
+    public void add(Iterator<E> iterator) {
         Assert.state(!this.inUse, "You can no longer add iterators to a composite iterator that's already in use");
-        if (this.iterators.contains(iterator)) { throw new IllegalArgumentException("You cannot add the same iterator twice"); }
+        if (this.iterators
+                .contains(iterator)) { throw new IllegalArgumentException("You cannot add the same iterator twice"); }
         this.iterators.add(iterator);
     }
 

@@ -21,16 +21,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Simple stop watch, allowing for timing of a number of tasks, exposing total running time and running time for each named task.
+ * Simple stop watch, allowing for timing of a number of tasks, exposing total running time and running time for each
+ * named task.
  *
  * <p>
- * Conceals use of {@code System.currentTimeMillis()}, improving the readability of application code and reducing the likelihood of calculation errors.
+ * Conceals use of {@code System.currentTimeMillis()}, improving the readability of application code and reducing the
+ * likelihood of calculation errors.
  *
  * <p>
  * Note that this object is not designed to be thread-safe and does not use synchronization.
  *
  * <p>
- * This class is normally used to verify performance during proof-of-concepts and in development, rather than as part of production applications.
+ * This class is normally used to verify performance during proof-of-concepts and in development, rather than as part of
+ * production applications.
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -40,7 +43,8 @@ import java.util.List;
 public class StopWatch {
 
     /**
-     * Identifier of this stop watch. Handy when we have output from multiple stop watches and need to distinguish between them in log or console output.
+     * Identifier of this stop watch. Handy when we have output from multiple stop watches and need to distinguish
+     * between them in log or console output.
      */
     private final String id;
 
@@ -74,7 +78,8 @@ public class StopWatch {
     /**
      * Construct a new stop watch with the given id. Does not start any task.
      * 
-     * @param id identifier for this stop watch. Handy when we have output from multiple stop watches and need to distinguish between them.
+     * @param id identifier for this stop watch. Handy when we have output from multiple stop watches and need to
+     *            distinguish between them.
      */
     public StopWatch(String id) {
         this.id = id;
@@ -92,8 +97,9 @@ public class StopWatch {
     }
 
     /**
-     * Determine whether the TaskInfo array is built over time. Set this to "false" when using a StopWatch for millions of intervals, or the task info structure
-     * will consume excessive memory. Default is "true".
+     * Determine whether the TaskInfo array is built over time. Set this to "false" when using a StopWatch for millions
+     * of intervals, or the task info structure will consume excessive memory. Default is "true".
+     * 
      * @param keepTaskList keepTaskList
      */
     public void setKeepTaskList(boolean keepTaskList) {
@@ -101,7 +107,8 @@ public class StopWatch {
     }
 
     /**
-     * Start an unnamed task. The results are undefined if {@link #stop()} or timing methods are called without invoking this method.
+     * Start an unnamed task. The results are undefined if {@link #stop()} or timing methods are called without invoking
+     * this method.
      * 
      * @see #stop()
      */
@@ -110,7 +117,8 @@ public class StopWatch {
     }
 
     /**
-     * Start a named task. The results are undefined if {@link #stop()} or timing methods are called without invoking this method.
+     * Start a named task. The results are undefined if {@link #stop()} or timing methods are called without invoking
+     * this method.
      * 
      * @param taskName the name of the task to start
      * @see #stop()
@@ -123,8 +131,8 @@ public class StopWatch {
     }
 
     /**
-     * Stop the current task. The results are undefined if timing methods are called without invoking at least one pair {@code #start()} / {@code #stop()}
-     * methods.
+     * Stop the current task. The results are undefined if timing methods are called without invoking at least one pair
+     * {@code #start()} / {@code #stop()} methods.
      * 
      * @see #start()
      */
@@ -153,6 +161,7 @@ public class StopWatch {
 
     /**
      * Return the name of the currently running task, if any.
+     * 
      * @return the name of the currently running task, if any.
      * @since 4.2.2
      * @see #isRunning()
@@ -163,15 +172,18 @@ public class StopWatch {
 
     /**
      * Return the time taken by the last task.
+     * 
      * @return the time taken by the last task.
      */
     public long getLastTaskTimeMillis() throws IllegalStateException {
-        if (this.lastTaskInfo == null) { throw new IllegalStateException("No tasks run: can't get last task interval"); }
+        if (this.lastTaskInfo == null) { throw new IllegalStateException(
+                "No tasks run: can't get last task interval"); }
         return this.lastTaskInfo.getTimeMillis();
     }
 
     /**
      * Return the name of the last task.
+     * 
      * @return the name of the last task.
      */
     public String getLastTaskName() throws IllegalStateException {
@@ -181,6 +193,7 @@ public class StopWatch {
 
     /**
      * Return the last task as a TaskInfo object.
+     * 
      * @return the last task as a TaskInfo object.
      */
     public TaskInfo getLastTaskInfo() throws IllegalStateException {
@@ -190,6 +203,7 @@ public class StopWatch {
 
     /**
      * Return the total time in milliseconds for all tasks.
+     * 
      * @return the total time in milliseconds for all tasks.
      */
     public long getTotalTimeMillis() {
@@ -198,6 +212,7 @@ public class StopWatch {
 
     /**
      * Return the total time in seconds for all tasks.
+     * 
      * @return the total time in seconds for all tasks.
      */
     public double getTotalTimeSeconds() {
@@ -206,6 +221,7 @@ public class StopWatch {
 
     /**
      * Return the number of tasks timed.
+     * 
      * @return the number of tasks timed.
      */
     public int getTaskCount() {
@@ -214,6 +230,7 @@ public class StopWatch {
 
     /**
      * Return an array of the data for tasks performed.
+     * 
      * @return an array of the data for tasks performed.
      */
     public TaskInfo[] getTaskInfo() {
@@ -223,6 +240,7 @@ public class StopWatch {
 
     /**
      * Return a short description of the total running time.
+     * 
      * @return a short description of the total running time.
      */
     public String shortSummary() {
@@ -230,8 +248,11 @@ public class StopWatch {
     }
 
     /**
-     * Return a string with a table describing all tasks performed. For custom reporting, call getTaskInfo() and use the task info directly.
-     * @return a string with a table describing all tasks performed. For custom reporting, call getTaskInfo() and use the task info directly.
+     * Return a string with a table describing all tasks performed. For custom reporting, call getTaskInfo() and use the
+     * task info directly.
+     * 
+     * @return a string with a table describing all tasks performed. For custom reporting, call getTaskInfo() and use
+     *         the task info directly.
      */
     public String prettyPrint() {
         StringBuilder sb = new StringBuilder(shortSummary());
@@ -258,8 +279,11 @@ public class StopWatch {
     }
 
     /**
-     * Return an informative string describing all tasks performed For custom reporting, call {@code getTaskInfo()} and use the task info directly.
-     * @return an informative string describing all tasks performed For custom reporting, call {@code getTaskInfo()} and use the task info directly.
+     * Return an informative string describing all tasks performed For custom reporting, call {@code getTaskInfo()} and
+     * use the task info directly.
+     * 
+     * @return an informative string describing all tasks performed For custom reporting, call {@code getTaskInfo()} and
+     *         use the task info directly.
      */
     @Override
     public String toString() {
@@ -292,6 +316,7 @@ public class StopWatch {
 
         /**
          * Return the name of this task.
+         * 
          * @return the name of this task.
          */
         public String getTaskName() {
@@ -300,6 +325,7 @@ public class StopWatch {
 
         /**
          * Return the time in milliseconds this task took.
+         * 
          * @return the time in milliseconds this task took.
          */
         public long getTimeMillis() {
@@ -308,6 +334,7 @@ public class StopWatch {
 
         /**
          * Return the time in seconds this task took.
+         * 
          * @return the time in seconds this task took.
          */
         public double getTimeSeconds() {

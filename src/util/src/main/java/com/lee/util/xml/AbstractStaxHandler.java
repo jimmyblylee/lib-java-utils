@@ -30,8 +30,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 /**
- * Abstract base class for SAX {@code ContentHandler} and {@code LexicalHandler} implementations that use StAX as a basis. All methods delegate to internal
- * template methods, capable of throwing a {@code XMLStreamException}. Additionally, an namespace context stack is used to keep track of declared namespaces.
+ * Abstract base class for SAX {@code ContentHandler} and {@code LexicalHandler} implementations that use StAX as a
+ * basis. All methods delegate to internal template methods, capable of throwing a {@code XMLStreamException}.
+ * Additionally, an namespace context stack is used to keep track of declared namespaces.
  *
  * @author Arjen Poutsma
  * @since 4.0.3
@@ -182,8 +183,8 @@ abstract class AbstractStaxHandler implements ContentHandler, LexicalHandler {
     public void endEntity(String name) throws SAXException {}
 
     /**
-     * Convert a namespace URI and DOM or SAX qualified name to a {@code QName}. The qualified name can have the form {@code prefix:localname} or
-     * {@code localName}.
+     * Convert a namespace URI and DOM or SAX qualified name to a {@code QName}. The qualified name can have the form
+     * {@code prefix:localname} or {@code localName}.
      * 
      * @param namespaceUri the namespace URI
      * @param qualifiedName the qualified name
@@ -227,9 +228,11 @@ abstract class AbstractStaxHandler implements ContentHandler, LexicalHandler {
 
     protected abstract void endDocumentInternal() throws XMLStreamException;
 
-    protected abstract void startElementInternal(QName name, Attributes attributes, Map<String, String> namespaceMapping) throws XMLStreamException;
+    protected abstract void startElementInternal(QName name, Attributes attributes,
+            Map<String, String> namespaceMapping) throws XMLStreamException;
 
-    protected abstract void endElementInternal(QName name, Map<String, String> namespaceMapping) throws XMLStreamException;
+    protected abstract void endElementInternal(QName name, Map<String, String> namespaceMapping)
+            throws XMLStreamException;
 
     protected abstract void charactersInternal(String data) throws XMLStreamException;
 

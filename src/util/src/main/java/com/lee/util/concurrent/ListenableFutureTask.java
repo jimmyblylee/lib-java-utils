@@ -40,8 +40,8 @@ public class ListenableFutureTask<T> extends FutureTask<T> implements Listenable
     }
 
     /**
-     * Create a {@code ListenableFutureTask} that will, upon running, execute the given {@link Runnable}, and arrange that {@link #get()} will return the given
-     * result on successful completion.
+     * Create a {@code ListenableFutureTask} that will, upon running, execute the given {@link Runnable}, and arrange
+     * that {@link #get()} will return the given result on successful completion.
      * 
      * @param runnable the runnable task
      * @param result the result to return on successful completion

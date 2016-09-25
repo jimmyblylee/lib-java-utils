@@ -1,4 +1,5 @@
 /**
- * Miscellaneous utility classes for XML parsing and transformation, such as error handlers that log warnings via Commons Logging.
+ * Miscellaneous utility classes for XML parsing and transformation, such as error handlers that log warnings via
+ * Commons Logging.
  */
 package com.lee.util.xml;

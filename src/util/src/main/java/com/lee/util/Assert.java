@@ -26,16 +26,18 @@ import java.util.Map;
  * Useful for identifying programmer errors early and clearly at runtime.
  *
  * <p>
- * For example, if the contract of a public method states it does not allow {@code null} arguments, {@code Assert} can be used to validate that contract. Doing
- * this clearly indicates a contract violation when it occurs and protects the class's invariants.
+ * For example, if the contract of a public method states it does not allow {@code null} arguments, {@code Assert} can
+ * be used to validate that contract. Doing this clearly indicates a contract violation when it occurs and protects the
+ * class's invariants.
  *
  * <p>
- * Typically used to validate method arguments rather than configuration properties, to check for cases that are usually programmer errors rather than
- * configuration errors. In contrast to configuration initialization code, there is usually no point in falling back to defaults in such methods.
+ * Typically used to validate method arguments rather than configuration properties, to check for cases that are usually
+ * programmer errors rather than configuration errors. In contrast to configuration initialization code, there is
+ * usually no point in falling back to defaults in such methods.
  *
  * <p>
- * This class is similar to JUnit's assertion library. If an argument value is deemed invalid, an {@link IllegalArgumentException} is thrown (typically). For
- * example:
+ * This class is similar to JUnit's assertion library. If an argument value is deemed invalid, an
+ * {@link IllegalArgumentException} is thrown (typically). For example:
  *
  * <pre class="code">
  * Assert.notNull(clazz, "The class must not be null");
@@ -43,8 +45,9 @@ import java.util.Map;
  * </pre>
  *
  * <p>
- * Mainly for internal use within the framework; consider <a href="http://commons.apache.org/proper/commons-lang/">Apache's Commons Lang</a> for a more
- * comprehensive suite of {@code String} utilities.
+ * Mainly for internal use within the framework; consider
+ * <a href="http://commons.apache.org/proper/commons-lang/">Apache's Commons Lang</a> for a more comprehensive suite of
+ * {@code String} utilities.
  *
  * @author Keith Donald
  * @author Juergen Hoeller
@@ -174,7 +177,8 @@ public abstract class Assert {
     }
 
     /**
-     * Assert that the given String has valid text content; that is, it must not be {@code null} and must contain at least one non-whitespace character.
+     * Assert that the given String has valid text content; that is, it must not be {@code null} and must contain at
+     * least one non-whitespace character.
      * 
      * <pre class="code">
      * Assert.hasText(name, "'name' must not be empty");
@@ -190,7 +194,8 @@ public abstract class Assert {
     }
 
     /**
-     * Assert that the given String has valid text content; that is, it must not be {@code null} and must contain at least one non-whitespace character.
+     * Assert that the given String has valid text content; that is, it must not be {@code null} and must contain at
+     * least one non-whitespace character.
      * 
      * <pre class="code">
      * Assert.hasText(name, "'name' must not be empty");
@@ -233,7 +238,8 @@ public abstract class Assert {
      * @throws IllegalArgumentException if the text contains the substring
      */
     public static void doesNotContain(String textToSearch, String substring) {
-        doesNotContain(textToSearch, substring, "[Assertion failed] - this String argument must not contain the substring [" + substring + "]");
+        doesNotContain(textToSearch, substring,
+                "[Assertion failed] - this String argument must not contain the substring [" + substring + "]");
     }
 
     /**
@@ -324,7 +330,8 @@ public abstract class Assert {
      * @throws IllegalArgumentException if the collection is {@code null} or has no elements
      */
     public static void notEmpty(Collection<?> collection) {
-        notEmpty(collection, "[Assertion failed] - this collection must not be empty: it must contain at least 1 element");
+        notEmpty(collection,
+                "[Assertion failed] - this collection must not be empty: it must contain at least 1 element");
     }
 
     /**
@@ -381,15 +388,17 @@ public abstract class Assert {
      * 
      * @param type the type to check against
      * @param obj the object to check
-     * @param message a message which will be prepended to the message produced by the function itself, and which may be used to provide context. It should
-     *            normally end in ":" or "." so that the generated message looks OK when appended to it.
+     * @param message a message which will be prepended to the message produced by the function itself, and which may be
+     *            used to provide context. It should normally end in ":" or "." so that the generated message looks OK
+     *            when appended to it.
      * @throws IllegalArgumentException if the object is not an instance of clazz
      * @see Class#isInstance
      */
     public static void isInstanceOf(Class<?> type, Object obj, String message) {
         notNull(type, "Type to check against must not be null");
-        if (!type.isInstance(obj)) { throw new IllegalArgumentException((StringUtils.hasLength(message) ? message + " " : "") + "Object of class ["
-                + (obj != null ? obj.getClass().getName() : "null") + "] must be an instance of " + type); }
+        if (!type.isInstance(obj)) { throw new IllegalArgumentException(
+                (StringUtils.hasLength(message) ? message + " " : "") + "Object of class ["
+                        + (obj != null ? obj.getClass().getName() : "null") + "] must be an instance of " + type); }
     }
 
     /**
@@ -416,19 +425,21 @@ public abstract class Assert {
      * 
      * @param superType the super type to check against
      * @param subType the sub type to check
-     * @param message a message which will be prepended to the message produced by the function itself, and which may be used to provide context. It should
-     *            normally end in ":" or "." so that the generated message looks OK when appended to it.
+     * @param message a message which will be prepended to the message produced by the function itself, and which may be
+     *            used to provide context. It should normally end in ":" or "." so that the generated message looks OK
+     *            when appended to it.
      * @throws IllegalArgumentException if the classes are not assignable
      */
     public static void isAssignable(Class<?> superType, Class<?> subType, String message) {
         notNull(superType, "Type to check against must not be null");
         if (subType == null || !superType.isAssignableFrom(subType)) { throw new IllegalArgumentException(
-                (StringUtils.hasLength(message) ? message + " " : "") + subType + " is not assignable to " + superType); }
+                (StringUtils.hasLength(message) ? message + " " : "") + subType + " is not assignable to "
+                        + superType); }
     }
 
     /**
-     * Assert a boolean expression, throwing {@code IllegalStateException} if the test result is {@code false}. Call isTrue if you wish to throw
-     * IllegalArgumentException on an assertion failure.
+     * Assert a boolean expression, throwing {@code IllegalStateException} if the test result is {@code false}. Call
+     * isTrue if you wish to throw IllegalArgumentException on an assertion failure.
      * 
      * <pre class="code">
      * Assert.state(id == null, "The id property must not already be initialized");

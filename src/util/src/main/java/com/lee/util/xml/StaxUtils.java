@@ -31,12 +31,12 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.XMLReader;
 
 /**
- * Convenience methods for working with the StAX API. Partly historic due to JAXP 1.3 compatibility; as of Spring 4.0, relying on JAXP 1.4 as included in JDK
- * 1.6 and higher.
+ * Convenience methods for working with the StAX API. Partly historic due to JAXP 1.3 compatibility; as of Spring 4.0,
+ * relying on JAXP 1.4 as included in JDK 1.6 and higher.
  *
  * <p>
- * In particular, methods for using StAX ({@code javax.xml.stream}) in combination with the TrAX API ({@code javax.xml.transform}), and converting StAX
- * readers/writers into SAX readers/handlers and vice-versa.
+ * In particular, methods for using StAX ({@code javax.xml.stream}) in combination with the TrAX API
+ * ({@code javax.xml.transform}), and converting StAX readers/writers into SAX readers/handlers and vice-versa.
  *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
@@ -87,8 +87,10 @@ public abstract class StaxUtils {
 
     /**
      * Indicate whether the given {@link Source} is a JAXP 1.4 StAX Source or custom StAX Source.
+     * 
      * @param source source
-     * @return {@code true} if {@code source} is a JAXP 1.4 {@link StAXSource} or custom StAX Source; {@code false} otherwise
+     * @return {@code true} if {@code source} is a JAXP 1.4 {@link StAXSource} or custom StAX Source; {@code false}
+     *         otherwise
      */
     public static boolean isStaxSource(Source source) {
         return (source instanceof StAXSource || source instanceof StaxSource);
@@ -172,7 +174,8 @@ public abstract class StaxUtils {
      * Indicate whether the given {@link Result} is a JAXP 1.4 StAX Result or custom StAX Result.
      * 
      * @param result result
-     * @return {@code true} if {@code result} is a JAXP 1.4 {@link StAXResult} or custom StAX Result; {@code false} otherwise
+     * @return {@code true} if {@code result} is a JAXP 1.4 {@link StAXResult} or custom StAX Result; {@code false}
+     *         otherwise
      */
     public static boolean isStaxResult(Result result) {
         return (result instanceof StAXResult || result instanceof StaxResult);
@@ -253,8 +256,8 @@ public abstract class StaxUtils {
     }
 
     /**
-     * Return a {@link XMLStreamReader} that reads from a {@link XMLEventReader}. Useful because the StAX {@code XMLInputFactory} allows one to create an event
-     * reader from a stream reader, but not vice-versa.
+     * Return a {@link XMLStreamReader} that reads from a {@link XMLEventReader}. Useful because the StAX
+     * {@code XMLInputFactory} allows one to create an event reader from a stream reader, but not vice-versa.
      * 
      * @param eventReader eventReader
      * @return a stream reader that reads from an event reader

@@ -24,8 +24,8 @@ import java.lang.reflect.Modifier;
  * Helper class that allows for specifying a method to invoke in a declarative fashion, be it static or non-static.
  *
  * <p>
- * Usage: Specify "targetClass"/"targetMethod" or "targetObject"/"targetMethod", optionally specify arguments, prepare the invoker. Afterwards, you may invoke
- * the method any number of times, obtaining the invocation result.
+ * Usage: Specify "targetClass"/"targetMethod" or "targetObject"/"targetMethod", optionally specify arguments, prepare
+ * the invoker. Afterwards, you may invoke the method any number of times, obtaining the invocation result.
  *
  * @author Colin Sampaleanu
  * @author Juergen Hoeller
@@ -49,8 +49,9 @@ public class MethodInvoker {
     private Method methodObject;
 
     /**
-     * Set the target class on which to call the target method. Only necessary when the target method is static; else, a target object needs to be specified
-     * anyway.
+     * Set the target class on which to call the target method. Only necessary when the target method is static; else, a
+     * target object needs to be specified anyway.
+     * 
      * @param targetClass targetClass
      * 
      * @see #setTargetObject
@@ -62,6 +63,7 @@ public class MethodInvoker {
 
     /**
      * Return the target class on which to call the target method.
+     * 
      * @return the target class on which to call the target method.
      */
     public Class<?> getTargetClass() {
@@ -69,7 +71,8 @@ public class MethodInvoker {
     }
 
     /**
-     * Set the target object on which to call the target method. Only necessary when the target method is not static; else, a target class is sufficient.
+     * Set the target object on which to call the target method. Only necessary when the target method is not static;
+     * else, a target class is sufficient.
      * 
      * @param targetObject targetObject
      * @see #setTargetClass
@@ -84,6 +87,7 @@ public class MethodInvoker {
 
     /**
      * Return the target object on which to call the target method.
+     * 
      * @return the target object on which to call the target method.
      */
     public Object getTargetObject() {
@@ -91,7 +95,8 @@ public class MethodInvoker {
     }
 
     /**
-     * Set the name of the method to be invoked. Refers to either a static method or a non-static method, depending on a target object being set.
+     * Set the name of the method to be invoked. Refers to either a static method or a non-static method, depending on a
+     * target object being set.
      * 
      * @param targetMethod targetMethod
      * @see #setTargetClass
@@ -103,6 +108,7 @@ public class MethodInvoker {
 
     /**
      * Return the name of the method to be invoked.
+     * 
      * @return the name of the method to be invoked.
      */
     public String getTargetMethod() {
@@ -110,8 +116,9 @@ public class MethodInvoker {
     }
 
     /**
-     * Set a fully qualified static method name to invoke, e.g. "example.MyExampleClass.myExampleMethod". Convenient alternative to specifying targetClass and
-     * targetMethod.
+     * Set a fully qualified static method name to invoke, e.g. "example.MyExampleClass.myExampleMethod". Convenient
+     * alternative to specifying targetClass and targetMethod.
+     * 
      * @param staticMethod staticMethod
      * 
      * @see #setTargetClass
@@ -122,7 +129,9 @@ public class MethodInvoker {
     }
 
     /**
-     * Set arguments for the method invocation. If this property is not set, or the Object array is of length 0, a method with no arguments is assumed.
+     * Set arguments for the method invocation. If this property is not set, or the Object array is of length 0, a
+     * method with no arguments is assumed.
+     * 
      * @param arguments arguments
      */
     public void setArguments(Object[] arguments) {
@@ -131,6 +140,7 @@ public class MethodInvoker {
 
     /**
      * Return the arguments for the method invocation.
+     * 
      * @return the arguments for the method invocation.
      */
     public Object[] getArguments() {
@@ -149,7 +159,8 @@ public class MethodInvoker {
         if (this.staticMethod != null) {
             int lastDotIndex = this.staticMethod.lastIndexOf('.');
             if (lastDotIndex == -1 || lastDotIndex == this.staticMethod.length()) { throw new IllegalArgumentException(
-                    "staticMethod must be a fully qualified class plus method name: " + "e.g. 'example.MyExampleClass.myExampleMethod'"); }
+                    "staticMethod must be a fully qualified class plus method name: "
+                            + "e.g. 'example.MyExampleClass.myExampleMethod'"); }
             String className = this.staticMethod.substring(0, lastDotIndex);
             String methodName = this.staticMethod.substring(lastDotIndex + 1);
             this.targetClass = resolveClassName(className);
@@ -158,7 +169,8 @@ public class MethodInvoker {
 
         Class<?> targetClass = getTargetClass();
         String targetMethod = getTargetMethod();
-        if (targetClass == null) { throw new IllegalArgumentException("Either 'targetClass' or 'targetObject' is required"); }
+        if (targetClass == null) { throw new IllegalArgumentException(
+                "Either 'targetClass' or 'targetObject' is required"); }
         if (targetMethod == null) { throw new IllegalArgumentException("Property 'targetMethod' is required"); }
 
         Object[] arguments = getArguments();
@@ -234,13 +246,17 @@ public class MethodInvoker {
      * @see #invoke
      */
     public Method getPreparedMethod() throws IllegalStateException {
-        if (this.methodObject == null) { throw new IllegalStateException("prepare() must be called prior to invoke() on MethodInvoker"); }
+        if (this.methodObject == null) { throw new IllegalStateException(
+                "prepare() must be called prior to invoke() on MethodInvoker"); }
         return this.methodObject;
     }
 
     /**
-     * Return whether this invoker has been prepared already, i.e. whether it allows access to {@link #getPreparedMethod()} already.
-     * @return whether this invoker has been prepared already, i.e. whether it allows access to {@link #getPreparedMethod()} already.
+     * Return whether this invoker has been prepared already, i.e. whether it allows access to
+     * {@link #getPreparedMethod()} already.
+     * 
+     * @return whether this invoker has been prepared already, i.e. whether it allows access to
+     *         {@link #getPreparedMethod()} already.
      */
     public boolean isPrepared() {
         return (this.methodObject != null);
@@ -251,7 +267,8 @@ public class MethodInvoker {
      * <p>
      * The invoker needs to have been prepared before.
      * 
-     * @return the object (possibly null) returned by the method invocation, or {@code null} if the method has a void return type
+     * @return the object (possibly null) returned by the method invocation, or {@code null} if the method has a void
+     *         return type
      * @throws InvocationTargetException if the target method threw an exception
      * @throws IllegalAccessException if the target method couldn't be accessed
      * @see #prepare
@@ -260,25 +277,29 @@ public class MethodInvoker {
         // In the static case, target will simply be {@code null}.
         Object targetObject = getTargetObject();
         Method preparedMethod = getPreparedMethod();
-        if (targetObject == null && !Modifier
-                .isStatic(preparedMethod.getModifiers())) { throw new IllegalArgumentException("Target method must not be non-static without a target"); }
+        if (targetObject == null
+                && !Modifier.isStatic(preparedMethod.getModifiers())) { throw new IllegalArgumentException(
+                        "Target method must not be non-static without a target"); }
         ReflectionUtils.makeAccessible(preparedMethod);
         return preparedMethod.invoke(targetObject, getArguments());
     }
 
     /**
-     * Algorithm that judges the match between the declared parameter types of a candidate method and a specific list of arguments that this method is supposed
-     * to be invoked with.
+     * Algorithm that judges the match between the declared parameter types of a candidate method and a specific list of
+     * arguments that this method is supposed to be invoked with.
      * <p>
-     * Determines a weight that represents the class hierarchy difference between types and arguments. A direct match, i.e. type Integer -&gt; arg of class
-     * Integer, does not increase the result - all direct matches means weight 0. A match between type Object and arg of class Integer would increase the weight
-     * by 2, due to the superclass 2 steps up in the hierarchy (i.e. Object) being the last one that still matches the required type Object. Type Number and
-     * class Integer would increase the weight by 1 accordingly, due to the superclass 1 step up the hierarchy (i.e. Number) still matching the required type
-     * Number. Therefore, with an arg of type Integer, a constructor (Integer) would be preferred to a constructor (Number) which would in turn be preferred to
-     * a constructor (Object). All argument weights get accumulated.
+     * Determines a weight that represents the class hierarchy difference between types and arguments. A direct match,
+     * i.e. type Integer -&gt; arg of class Integer, does not increase the result - all direct matches means weight 0. A
+     * match between type Object and arg of class Integer would increase the weight by 2, due to the superclass 2 steps
+     * up in the hierarchy (i.e. Object) being the last one that still matches the required type Object. Type Number and
+     * class Integer would increase the weight by 1 accordingly, due to the superclass 1 step up the hierarchy (i.e.
+     * Number) still matching the required type Number. Therefore, with an arg of type Integer, a constructor (Integer)
+     * would be preferred to a constructor (Number) which would in turn be preferred to a constructor (Object). All
+     * argument weights get accumulated.
      * <p>
-     * Note: This is the algorithm used by MethodInvoker itself and also the algorithm used for constructor and factory method selection in Spring's bean
-     * container (in case of lenient constructor resolution which is the default for regular bean definitions).
+     * Note: This is the algorithm used by MethodInvoker itself and also the algorithm used for constructor and factory
+     * method selection in Spring's bean container (in case of lenient constructor resolution which is the default for
+     * regular bean definitions).
      * 
      * @param paramTypes the parameter types to match
      * @param args the arguments to match

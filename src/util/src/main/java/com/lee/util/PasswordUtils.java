@@ -40,10 +40,8 @@ public abstract class PasswordUtils {
             StringBuffer buf = new StringBuffer("");
             for (int offset = 0; offset < b.length; offset++) {
                 i = b[offset];
-                if (i < 0)
-                    i += 256;
-                if (i < 16)
-                    buf.append("0");
+                if (i < 0) i += 256;
+                if (i < 16) buf.append("0");
                 buf.append(Integer.toHexString(i));
             }
             return buf.toString();
@@ -63,9 +61,7 @@ public abstract class PasswordUtils {
      * @throws RuntimeException while the lenght is less than 3
      */
     public static String generateSimplePwd(Integer length) {
-        if (length < 3) {
-            throw new RuntimeException("length should be greater than 3");
-        }
+        if (length < 3) { throw new RuntimeException("length should be greater than 3"); }
         StringBuilder source = new StringBuilder();
         source.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         source.append(source.toString().toLowerCase());
@@ -88,9 +84,10 @@ public abstract class PasswordUtils {
         }
         return result.toString();
     }
-    
+
     /**
-     * Description : generate password by given length, containing Upper Char, Lower Char, Number Char and Special Char <br>
+     * Description : generate password by given length, containing Upper Char, Lower Char, Number Char and Special Char
+     * <br>
      * Create Time: 2016-09-17 <br>
      * Create by : jimmyblylee@126.com <br>
      *
@@ -99,9 +96,7 @@ public abstract class PasswordUtils {
      * @throws RuntimeException while the lenght is less than 4
      */
     public static String generateComplexPwd(Integer length) {
-        if (length < 4) {
-            throw new RuntimeException("length should be greater than 4");
-        }
+        if (length < 4) { throw new RuntimeException("length should be greater than 4"); }
         StringBuilder source = new StringBuilder();
         source.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         source.append(source.toString().toLowerCase());

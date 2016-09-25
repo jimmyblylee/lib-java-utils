@@ -19,8 +19,8 @@ package com.lee.util.concurrent;
 import java.util.concurrent.Future;
 
 /**
- * Extends the {@link Future} interface with the capability to accept completion callbacks. If the future has already completed when the callback is added, the
- * callback will be triggered immediately.
+ * Extends the {@link Future} interface with the capability to accept completion callbacks. If the future has already
+ * completed when the callback is added, the callback will be triggered immediately.
  * <p>
  * Inspired by {@code com.google.common.util.concurrent.ListenableFuture}.
  * 
@@ -31,16 +31,17 @@ import java.util.concurrent.Future;
 public interface ListenableFuture<T> extends Future<T> {
 
     /**
-     * Registers the given callback to this {@code ListenableFuture}. The callback will be triggered when this {@code Future} is complete or, if it is already
-     * complete, immediately.
+     * Registers the given callback to this {@code ListenableFuture}. The callback will be triggered when this
+     * {@code Future} is complete or, if it is already complete, immediately.
      * 
      * @param callback the callback to register
      */
     void addCallback(ListenableFutureCallback<? super T> callback);
 
     /**
-     * Registers the given success and failure callbacks to this {@code ListenableFuture}. The callback will be triggered when this {@code Future} is complete
-     * or, if it is already complete immediately. This is a Java 8 lambdas compliant alternative to {@link #addCallback(ListenableFutureCallback)}.
+     * Registers the given success and failure callbacks to this {@code ListenableFuture}. The callback will be
+     * triggered when this {@code Future} is complete or, if it is already complete immediately. This is a Java 8
+     * lambdas compliant alternative to {@link #addCallback(ListenableFutureCallback)}.
      * 
      * @param successCallback the success callback to register
      * @param failureCallback the failure callback to register

@@ -20,7 +20,8 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * A simple instance filter that checks if a given instance match based on a collection of includes and excludes element.
+ * A simple instance filter that checks if a given instance match based on a collection of includes and excludes
+ * element.
  *
  * <p>
  * Subclasses may want to override {@link #match(Object, Object)} to provide a custom matching algorithm.
@@ -39,9 +40,11 @@ public class InstanceFilter<T> {
     /**
      * Create a new instance based on includes/excludes collections.
      * <p>
-     * A particular element will match if it "matches" the one of the element in the includes list and does not match one of the element in the excludes list.
+     * A particular element will match if it "matches" the one of the element in the includes list and does not match
+     * one of the element in the excludes list.
      * <p>
-     * Subclasses may redefine what matching means. By default, an element match with another if it is equals according to {@link Object#equals(Object)}
+     * Subclasses may redefine what matching means. By default, an element match with another if it is equals according
+     * to {@link Object#equals(Object)}
      * <p>
      * If both collections are empty, {@code matchIfEmpty} defines if an element matches or not.
      * 
@@ -58,6 +61,7 @@ public class InstanceFilter<T> {
 
     /**
      * Determine if the specified {code instance} matches this filter.
+     * 
      * @param instance instance
      * @return true if match
      */

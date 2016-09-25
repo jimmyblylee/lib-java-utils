@@ -58,6 +58,7 @@ public abstract class BeanUtils {
     /**
      * Convenience method to instantiate a class using its no-arg constructor.
      * 
+     * @param <T> target type
      * @param clazz class to instantiate
      * @return the new instance
      * @throws RuntimeException if the bean cannot be instantiated
@@ -65,7 +66,8 @@ public abstract class BeanUtils {
      */
     public static <T> T instantiate(Class<T> clazz) throws RuntimeException {
         Assert.notNull(clazz, "Class must not be null");
-        if (clazz.isInterface()) { throw new RuntimeException("Failed to instantiate [" + clazz + "]: Specified class is an interface"); }
+        if (clazz.isInterface()) { throw new RuntimeException(
+                "Failed to instantiate [" + clazz + "]: Specified class is an interface"); }
         try {
             return clazz.newInstance();
         } catch (InstantiationException ex) {
@@ -81,6 +83,7 @@ public abstract class BeanUtils {
      * Note that this method tries to set the constructor accessible if given a non-accessible (that is, non-public)
      * constructor.
      * 
+     * @param <T> target Type
      * @param clazz class to instantiate
      * @return the new instance
      * @throws RuntimeException if the bean cannot be instantiated
@@ -88,7 +91,8 @@ public abstract class BeanUtils {
      */
     public static <T> T instantiateClass(Class<T> clazz) throws RuntimeException {
         Assert.notNull(clazz, "Class must not be null");
-        if (clazz.isInterface()) { throw new RuntimeException("Failed to instantiate [" + clazz + "]: Specified class is an interface"); }
+        if (clazz.isInterface()) { throw new RuntimeException(
+                "Failed to instantiate [" + clazz + "]: Specified class is an interface"); }
         try {
             return instantiateClass(clazz.getDeclaredConstructor());
         } catch (NoSuchMethodException ex) {
@@ -105,6 +109,7 @@ public abstract class BeanUtils {
      * Note that this method tries to set the constructor accessible if given a non-accessible (that is, non-public)
      * constructor.
      * 
+     * @param <T> target type
      * @param clazz class to instantiate
      * @param assignableTo type that clazz must be assignableTo
      * @return the new instance
@@ -123,6 +128,7 @@ public abstract class BeanUtils {
      * Note that this method tries to set the constructor accessible if given a non-accessible (that is, non-public)
      * constructor.
      * 
+     * @param <T> target type
      * @param ctor the constructor to instantiate
      * @param args the constructor arguments to apply
      * @return the new instance
@@ -141,7 +147,8 @@ public abstract class BeanUtils {
         } catch (IllegalArgumentException ex) {
             throw new RuntimeException("Failed to instantiate [" + ctor + "]: Illegal arguments for constructor", ex);
         } catch (InvocationTargetException ex) {
-            throw new RuntimeException("Failed to instantiate [" + ctor + "]: Constructor threw exception", ex.getTargetException());
+            throw new RuntimeException("Failed to instantiate [" + ctor + "]: Constructor threw exception",
+                    ex.getTargetException());
         }
     }
 
@@ -354,10 +361,8 @@ public abstract class BeanUtils {
     public static PropertyDescriptor getPropertyDescriptor(Class<?> clazz, String propertyName)
             throws RuntimeException {
         try {
-            for (PropertyDescriptor pd :Introspector.getBeanInfo(clazz).getPropertyDescriptors()) {
-                if (pd.getName().equals(propertyName)) {
-                    return pd;
-                }
+            for (PropertyDescriptor pd : Introspector.getBeanInfo(clazz).getPropertyDescriptors()) {
+                if (pd.getName().equals(propertyName)) { return pd; }
             }
         } catch (IntrospectionException e) {
             // ignore
@@ -397,7 +402,7 @@ public abstract class BeanUtils {
     }
 
     /**
-     * Find a JavaBeans PropertyEditor following the 'Editor' suffix convention (e.g. "mypackage.MyDomainClass" ->
+     * Find a JavaBeans PropertyEditor following the 'Editor' suffix convention (e.g. "mypackage.MyDomainClass" -&gt;
      * "mypackage.MyDomainClassEditor").
      * <p>
      * Compatible to the standard JavaBeans convention as implemented by {@link java.beans.PropertyEditorManager} but
@@ -482,8 +487,6 @@ public abstract class BeanUtils {
      * 
      * @param clazz the type to check
      * @return whether the given type represents a "simple" property
-     * @see org.springframework.beans.factory.support.RootBeanDefinition#DEPENDENCY_CHECK_SIMPLE
-     * @see org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#checkDependencies
      */
     public static boolean isSimpleProperty(Class<?> clazz) {
         Assert.notNull(clazz, "Class must not be null");
@@ -515,7 +518,6 @@ public abstract class BeanUtils {
      * @param source the source bean
      * @param target the target bean
      * @throws RuntimeException if the copying failed
-     * @see BeanWrapper
      */
     public static void copyProperties(Object source, Object target) throws RuntimeException {
         copyProperties(source, target, null, (String[]) null);
@@ -535,7 +537,6 @@ public abstract class BeanUtils {
      * @param target the target bean
      * @param editable the class (or interface) to restrict property setting to
      * @throws RuntimeException if the copying failed
-     * @see BeanWrapper
      */
     public static void copyProperties(Object source, Object target, Class<?> editable) throws RuntimeException {
         copyProperties(source, target, editable, (String[]) null);
@@ -555,7 +556,6 @@ public abstract class BeanUtils {
      * @param target the target bean
      * @param ignoreProperties array of property names to ignore
      * @throws RuntimeException if the copying failed
-     * @see BeanWrapper
      */
     public static void copyProperties(Object source, Object target, String... ignoreProperties)
             throws RuntimeException {

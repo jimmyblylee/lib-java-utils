@@ -27,11 +27,12 @@ import com.lee.util.Assert;
  * A comparator that chains a sequence of one or more more Comparators.
  *
  * <p>
- * A compound comparator calls each Comparator in sequence until a single Comparator returns a non-zero result, or the comparators are exhausted and zero is
- * returned.
+ * A compound comparator calls each Comparator in sequence until a single Comparator returns a non-zero result, or the
+ * comparators are exhausted and zero is returned.
  *
  * <p>
- * This facilitates in-memory sorting similar to multi-column sorting in SQL. The order of any single Comparator in the list can also be reversed.
+ * This facilitates in-memory sorting similar to multi-column sorting in SQL. The order of any single Comparator in the
+ * list can also be reversed.
  *
  * @author Keith Donald
  * @author Juergen Hoeller
@@ -43,8 +44,8 @@ public class CompoundComparator<T> implements Comparator<T>, Serializable {
     private final List<InvertibleComparator> comparators;
 
     /**
-     * Construct a CompoundComparator with initially no Comparators. Clients must add at least one Comparator before calling the compare method or an
-     * IllegalStateException is thrown.
+     * Construct a CompoundComparator with initially no Comparators. Clients must add at least one Comparator before
+     * calling the compare method or an IllegalStateException is thrown.
      */
     public CompoundComparator() {
         this.comparators = new ArrayList<InvertibleComparator>();
@@ -162,6 +163,7 @@ public class CompoundComparator<T> implements Comparator<T>, Serializable {
 
     /**
      * Returns the number of aggregated comparators.
+     * 
      * @return the number of aggregated comparators.
      */
     public int getComparatorCount() {
@@ -171,7 +173,8 @@ public class CompoundComparator<T> implements Comparator<T>, Serializable {
     @Override
     @SuppressWarnings("unchecked")
     public int compare(T o1, T o2) {
-        Assert.state(this.comparators.size() > 0, "No sort definitions have been added to this CompoundComparator to compare");
+        Assert.state(this.comparators.size() > 0,
+                "No sort definitions have been added to this CompoundComparator to compare");
         for (InvertibleComparator comparator : this.comparators) {
             int result = comparator.compare(o1, o2);
             if (result != 0) { return result; }

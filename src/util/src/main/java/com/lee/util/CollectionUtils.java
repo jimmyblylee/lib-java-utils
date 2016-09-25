@@ -42,7 +42,8 @@ import java.util.Set;
 public abstract class CollectionUtils {
 
     /**
-     * Description : add target into source by unique, if the {@link Comparator#compare(Object, Object)} equals zero, then add it <br>
+     * Description : add target into source by unique, if the {@link Comparator#compare(Object, Object)} equals zero,
+     * then add it <br>
      * Create Time: 2016-09-17 <br>
      * Create by : jimmyblylee@126.com <br>
      *
@@ -53,15 +54,14 @@ public abstract class CollectionUtils {
      */
     public static <T> void addUniqueByComparator(Collection<T> source, T target, Comparator<T> comparator) {
         for (T t : source) {
-            if (comparator.compare(t, target) == 0) {
-                return;
-            }
+            if (comparator.compare(t, target) == 0) { return; }
         }
         source.add(target);
     }
 
     /**
-     * Description : add all target into source by unique, if the {@link Comparator#compare(Object, Object)} equals zero, then add it <br>
+     * Description : add all target into source by unique, if the {@link Comparator#compare(Object, Object)} equals
+     * zero, then add it <br>
      * Create Time: 2016-09-17 <br>
      * Create by : jimmyblylee@126.com <br>
      *
@@ -97,10 +97,11 @@ public abstract class CollectionUtils {
     }
 
     /**
-     * Convert the supplied array into a List. A primitive array gets converted into a List of the appropriate wrapper type.
+     * Convert the supplied array into a List. A primitive array gets converted into a List of the appropriate wrapper
+     * type.
      * <p>
-     * <b>NOTE:</b> Generally prefer the standard {@link Arrays#asList} method. This {@code arrayToList} method is just meant to deal with an incoming Object
-     * value that might be an {@code Object[]} or a primitive array at runtime.
+     * <b>NOTE:</b> Generally prefer the standard {@link Arrays#asList} method. This {@code arrayToList} method is just
+     * meant to deal with an incoming Object value that might be an {@code Object[]} or a primitive array at runtime.
      * <p>
      * A {@code null} source value will be converted to an empty List.
      * 
@@ -133,7 +134,8 @@ public abstract class CollectionUtils {
     /**
      * Merge the given Properties instance into the given Map, copying all properties (key-value pairs) over.
      * <p>
-     * Uses {@code Properties.propertyNames()} to even catch default properties linked into the original Properties instance.
+     * Uses {@code Properties.propertyNames()} to even catch default properties linked into the original Properties
+     * instance.
      * 
      * @param <K> type of map key
      * @param <V> type of map value
@@ -209,7 +211,8 @@ public abstract class CollectionUtils {
     }
 
     /**
-     * Return {@code true} if any element in '{@code candidates}' is contained in '{@code source}'; otherwise returns {@code false}.
+     * Return {@code true} if any element in '{@code candidates}' is contained in '{@code source}'; otherwise returns
+     * {@code false}.
      * 
      * @param source the source Collection
      * @param candidates the candidates to search for
@@ -224,8 +227,9 @@ public abstract class CollectionUtils {
     }
 
     /**
-     * Return the first element in '{@code candidates}' that is contained in '{@code source}'. If no element in '{@code candidates}' is present in
-     * '{@code source}' returns {@code null}. Iteration order is {@link Collection} implementation specific.
+     * Return the first element in '{@code candidates}' that is contained in '{@code source}'. If no element in
+     * '{@code candidates}' is present in '{@code source}' returns {@code null}. Iteration order is {@link Collection}
+     * implementation specific.
      * 
      * @param <E> type of target object
      * @param source the source Collection
@@ -247,7 +251,8 @@ public abstract class CollectionUtils {
      * @param <T> type of target object
      * @param collection the Collection to search
      * @param type the type to look for
-     * @return a value of the given type found if there is a clear match, or {@code null} if none or more than one such value found
+     * @return a value of the given type found if there is a clear match, or {@code null} if none or more than one such
+     *         value found
      */
     @SuppressWarnings("unchecked")
     public static <T> T findValueOfType(Collection<?> collection, Class<T> type) {
@@ -266,12 +271,13 @@ public abstract class CollectionUtils {
     }
 
     /**
-     * Find a single value of one of the given types in the given Collection: searching the Collection for a value of the first type, then searching for a value
-     * of the second type, etc.
+     * Find a single value of one of the given types in the given Collection: searching the Collection for a value of
+     * the first type, then searching for a value of the second type, etc.
      * 
      * @param collection the collection to search
      * @param types the types to look for, in prioritized order
-     * @return a value of one of the given types found if there is a clear match, or {@code null} if none or more than one such value found
+     * @return a value of one of the given types found if there is a clear match, or {@code null} if none or more than
+     *         one such value found
      */
     public static Object findValueOfType(Collection<?> collection, Class<?>[] types) {
         if (isEmpty(collection) || ObjectUtils.isEmpty(types)) { return null; }
@@ -286,7 +292,8 @@ public abstract class CollectionUtils {
      * Determine whether the given Collection only contains a single unique object.
      * 
      * @param collection the Collection to check
-     * @return {@code true} if the collection contains a single reference or multiple references to the same instance, {@code false} else
+     * @return {@code true} if the collection contains a single reference or multiple references to the same instance,
+     *         {@code false} else
      */
     public static boolean hasUniqueObject(Collection<?> collection) {
         if (isEmpty(collection)) { return false; }
@@ -305,7 +312,8 @@ public abstract class CollectionUtils {
      * Find the common element type of the given Collection, if any.
      * 
      * @param collection the Collection to check
-     * @return the common element type, or {@code null} if no clear common type has been found (or the collection was empty)
+     * @return the common element type, or {@code null} if no clear common type has been found (or the collection was
+     *         empty)
      */
     public static Class<?> findCommonElementType(Collection<?> collection) {
         if (isEmpty(collection)) { return null; }
@@ -321,8 +329,9 @@ public abstract class CollectionUtils {
     }
 
     /**
-     * Marshal the elements from the given enumeration into an array of the given type. Enumeration elements must be assignable to the type of the given array.
-     * The array returned will be a different instance than the array given.
+     * Marshal the elements from the given enumeration into an array of the given type. Enumeration elements must be
+     * assignable to the type of the given array. The array returned will be a different instance than the array given.
+     * 
      * @param <A> subclass type
      * @param <E> array type
      * @param enumeration enumeration
